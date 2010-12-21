@@ -11,10 +11,11 @@
 
 @interface AnonymousOverlayView : UIView {
 	UIImage * overlayImage;
-	NSArray * rects;
+	NSMutableArray * rects;
 	
 }
 
-@property (retain) NSArray * rects;
+@property (nonatomic,retain) NSMutableArray * rects;
+@property (nonatomic,retain) UIImage * overlayImage;
 
 @end

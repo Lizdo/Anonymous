@@ -13,7 +13,7 @@
 	
 	IBOutlet UIView *previewView;
 	IBOutlet AnonymousOverlayView *overlayView;	
-	IBOutlet UIImageView *imageView;
+
 	BOOL processingImage;
 	
 	SystemSoundID alertSoundID;
@@ -31,7 +31,6 @@
 
 @property (nonatomic, retain) UIView *previewView;
 @property (nonatomic, retain) AnonymousOverlayView *overlayView;
-@property (retain) UIImageView *imageView;
 
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
 

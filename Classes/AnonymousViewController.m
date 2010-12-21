@@ -2,7 +2,7 @@
 #import "AnonymousOverlayView.h"
 
 @implementation AnonymousViewController
-@synthesize previewView, overlayView, imageView;
+@synthesize previewView, overlayView;
 
 #define FrameBufferWidth 360
 #define FrameBufferHeight 480
@@ -101,7 +101,6 @@
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt" ofType:@"xml"];
 	cascade = (CvHaarClassifierCascade*)cvLoad([path cStringUsingEncoding:NSASCIIStringEncoding], NULL, NULL, NULL);
 	
-	test_image = cvCreateImage( cvSize(FrameBufferWidth,FrameBufferHeight), 8, 1 );
 	gray = cvCreateImage( cvSize(FrameBufferWidth,FrameBufferHeight), 8, 1 );
 	small_image = cvCreateImage( cvSize( cvRound (FrameBufferWidth/DetectScale),
 												  cvRound (FrameBufferHeight/DetectScale)), 8, 1 );
@@ -117,7 +116,6 @@
 	if (storage) {
 		cvReleaseMemStorage(&storage);
 	}
-	cvReleaseImage(&test_image);
 	cvReleaseImage(&small_image);
 	cvReleaseImage(&gray);
 }
@@ -125,8 +123,6 @@
 - (void)detectFace:(UIImage *)uiImage{
 	if(uiImage) {
 		processingImage = YES;
-		
-		imageView.image = uiImage;
 		
 		cvSetErrMode(CV_ErrModeParent);
 		
@@ -137,53 +133,25 @@
 		cvResize( gray, small_image, CV_INTER_LINEAR );
 		cvEqualizeHist( small_image, small_image );
 		
-		//Benchmark Start
-		start = [NSDate date];
-		
 		// Detect faces and draw rectangle on them
 		CvSeq* faces = cvHaarDetectObjects(small_image, cascade, storage, 1.5f, 2, CV_HAAR_DO_CANNY_PRUNING, cvSize(20, 20));
-		
-		NSTimeInterval timeInterval = [start timeIntervalSinceNow];
-		NSLog(@"Time Take: %f", timeInterval);
-		//Benchmark End
-
-		// Create canvas to show the results
-		CGImageRef imageRef = imageView.image.CGImage;
-		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		CGContextRef contextRef = CGBitmapContextCreate(NULL, FrameBufferWidth, FrameBufferHeight,
-														8, FrameBufferWidth * 4,
-														colorSpace, kCGImageAlphaPremultipliedLast|kCGBitmapByteOrderDefault);
-		CGContextDrawImage(contextRef, CGRectMake(0, 0, FrameBufferWidth, FrameBufferHeight), imageRef);
-		
-		CGContextSetLineWidth(contextRef, 4);
-		CGContextSetRGBStrokeColor(contextRef, 0.0, 0.0, 1.0, 0.5);
 				
 		// Draw results on the iamge
-		for(int i = 0; i < faces->total; i++) {
-			NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-			
-			// Calc the rect of faces
-			CvRect cvrect = *(CvRect*)cvGetSeqElem(faces, i);
-			CGRect face_rect = CGContextConvertRectToDeviceSpace(contextRef, CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale));
-			
-			NSLog(@"Face Detected@%f,%f,%f,%f", face_rect.origin.x, face_rect.origin.y
-				  ,face_rect.size.width,face_rect.size.height);
-			
-
-			CGContextStrokeRect(contextRef, face_rect);
-			[pool release];
+		for(int i = 0; i < 10; i++) {
+			if (i >= faces->total) {
+				if (!CGRectEqualToRect([[overlayView.rects objectAtIndex:i] CGRectValue], CGRectZero)) {
+					[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectZero]];
+				}
+			}else{
+				CvRect cvrect = *(CvRect*)cvGetSeqElem(faces, i);
+				[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale)]];
+			}
 		}
 		
-		CGImageRef c = CGBitmapContextCreateImage(contextRef);
-		imageView.image = [UIImage imageWithCGImage:c];
-		
-		CGImageRelease(c);
-		CGContextRelease(contextRef);
-		CGColorSpaceRelease(colorSpace);
+		[overlayView setNeedsDisplay];
 		
 		//Need to release IplImage from CreateIplImageFromUIImage()
 		cvReleaseImage(&test_image);
-
 		
 		processingImage = NO;		
 	}
@@ -270,7 +238,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	if (processingImage) {
 		return;
 	}
-	NSLog(@"Frame Captured");
+	
 	UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
 	//imageView.image = image;
 

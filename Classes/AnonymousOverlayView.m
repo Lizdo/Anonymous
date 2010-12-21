@@ -8,42 +8,63 @@
 
 #import "AnonymousOverlayView.h"
 
+#define EnlargeScale 1.5
+
+CGRect enlargeRect(CGRect r){
+	CGPoint midPoint = CGPointMake(r.origin.x+r.size.width/2, r.origin.y+r.size.height/2);
+	return CGRectMake(midPoint.x-r.size.width*EnlargeScale/2, midPoint.y-r.size.height*EnlargeScale/2, 
+					   r.size.width*EnlargeScale, r.size.height*EnlargeScale);
+}
+
 
 @implementation AnonymousOverlayView
 
-@synthesize rects;
+@synthesize rects, overlayImage;
 
-- (id)initWithFrame:(CGRect)frame {
-    
-    self = [super initWithFrame:frame];
+// The view is created from interface builder
+- (id)initWithCoder:(NSCoder *)decoder{
+	self = [super initWithCoder:decoder];
     if (self) {
-        // Initialization code.
+        // Create 10 slots for potential faces
+		self.rects = [NSMutableArray arrayWithCapacity:10];
+		for (int i = 0; i < 10; i++) {
+			[rects addObject:[NSValue valueWithCGRect:CGRectZero]];
+		}
+		// Default Overlay
+		self.overlayImage = [UIImage imageNamed:@"laughing_man.png"];
     }
     return self;
 }
 
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
 	CGContextRef contextRef = UIGraphicsGetCurrentContext();
+	CGContextClearRect(contextRef, rect);
+	
 	CGContextSetLineWidth(contextRef, 4);
 	CGContextSetRGBStrokeColor(contextRef, 0.0, 0.0, 1.0, 0.5);
+
 	
 	//Draw the rects
-	NSLog(@"Number of rects: %d", [rects count]);
 	for (id object in rects) {
 		CGRect rect = [object CGRectValue];
-		//if(overlayImage) {
-//			CGContextDrawImage(contextRef, rect, overlayImage.CGImage);
-//		} else {
-			CGContextStrokeRect(contextRef, rect);
-		//}
+		
+		if (!CGRectEqualToRect(rect,CGRectZero)) {
+			if(overlayImage) {
+				CGContextDrawImage(contextRef, enlargeRect(rect), overlayImage.CGImage);
+			} else {
+				CGContextStrokeRect(contextRef, rect);
+			}
+		}
 	}
 }
 
 
+
+
 - (void)dealloc {
+	[rects removeAllObjects];
+	rects = nil;
+	overlayImage = nil;
     [super dealloc];
 }
 

@@ -84,12 +84,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6E11C85612BDE8E100D71A6F /* AnonymousOverlayView.h */,
+				6E11C85712BDE8E100D71A6F /* AnonymousOverlayView.m */,
 				1D3623240D0F684500981E51 /* AnonymousAppDelegate.h */,
 				1D3623250D0F684500981E51 /* AnonymousAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* AnonymousViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* AnonymousViewController.m */,
-				6E11C85612BDE8E100D71A6F /* AnonymousOverlayView.h */,
-				6E11C85712BDE8E100D71A6F /* AnonymousOverlayView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

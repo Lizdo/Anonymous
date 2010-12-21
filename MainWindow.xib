@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="10"/>
+			<integer value="33"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -63,7 +63,7 @@
 						<object class="IBUIView" id="590289214">
 							<reference key="NSNextResponder" ref="453656443"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrameSize">{320, 460}</string>
+							<string key="NSFrameSize">{320, 426}</string>
 							<reference key="NSSuperview" ref="453656443"/>
 							<object class="NSColor" key="IBUIBackgroundColor">
 								<int key="NSColorSpace">2</int>
@@ -74,26 +74,13 @@
 						<object class="IBUIView" id="97644860">
 							<reference key="NSNextResponder" ref="453656443"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrameSize">{320, 460}</string>
+							<string key="NSFrameSize">{320, 426}</string>
 							<reference key="NSSuperview" ref="453656443"/>
 							<object class="NSColor" key="IBUIBackgroundColor">
 								<int key="NSColorSpace">3</int>
 								<bytes key="NSWhite">MCAwAA</bytes>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						</object>
-						<object class="IBUIImageView" id="403035386">
-							<reference key="NSNextResponder" ref="453656443"/>
-							<int key="NSvFlags">283</int>
-							<string key="NSFrame">{{208, 304}, {92, 128}}</string>
-							<reference key="NSSuperview" ref="453656443"/>
-							<int key="IBUIContentMode">1</int>
-							<bool key="IBUIUserInteractionEnabled">NO</bool>
-							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<object class="NSCustomResource" key="IBUIImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">lena.jpg</string>
-							</object>
 						</object>
 					</object>
 					<string key="NSFrameSize">{320, 460}</string>
@@ -158,14 +145,6 @@
 					</object>
 					<int key="connectionID">35</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageView</string>
-						<reference key="source" ref="943309135"/>
-						<reference key="destination" ref="403035386"/>
-					</object>
-					<int key="connectionID">37</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -217,7 +196,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="97644860"/>
 							<reference ref="590289214"/>
-							<reference ref="403035386"/>
 						</object>
 						<reference key="parent" ref="943309135"/>
 					</object>
@@ -238,11 +216,6 @@
 						</object>
 						<reference key="parent" ref="453656443"/>
 						<string key="objectName">Overlay</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">36</int>
-						<reference key="object" ref="403035386"/>
-						<reference key="parent" ref="453656443"/>
 					</object>
 				</object>
 			</object>
@@ -266,15 +239,13 @@
 					<string>33.CustomClassName</string>
 					<string>33.IBPluginDependency</string>
 					<string>33.IBViewBoundsToFrameTransform</string>
-					<string>36.IBPluginDependency</string>
-					<string>36.IBViewBoundsToFrameTransform</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIApplication</string>
 					<string>UIResponder</string>
 					<string>AnonymousViewController</string>
-					<string>{{375, 107}, {320, 480}}</string>
+					<string>{{438, 37}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableDictionary">
@@ -293,10 +264,6 @@
 					<string>AnonymousOverlayView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform"/>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUNQAABDmAAAA</bytes>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -631,10 +598,6 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">Anonymous.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">lena.jpg</string>
-			<string key="NS.object.0">{512, 512}</string>
-		</object>
 		<string key="IBCocoaTouchPluginVersion">132</string>
 	</data>
 </archive>
