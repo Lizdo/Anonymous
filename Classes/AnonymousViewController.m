@@ -2,12 +2,39 @@
 #import "AnonymousOverlayView.h"
 
 @implementation AnonymousViewController
-@synthesize previewView, overlayView;
+@synthesize previewView, overlayView, start;
 
 #define FrameBufferWidth 360
 #define FrameBufferHeight 480
 #define DetectScale 4
 
+
+IplImage* transposeImage(IplImage* image) {
+	
+	IplImage *rotated = cvCreateImage(cvSize(image->height,image->width), IPL_DEPTH_8U,image->nChannels);
+	
+	CvPoint2D32f center;
+	
+	float center_val = image->height/2.0f;
+	center.x = center_val;
+	center.y = center_val;
+	CvMat *mapMatrix = cvCreateMat( 2, 3, CV_32FC1 );
+	
+	cv2DRotationMatrix(center, -90, 1.0, mapMatrix);
+	cvWarpAffine(image, rotated, mapMatrix, CV_INTER_LINEAR + CV_WARP_FILL_OUTLIERS, cvScalarAll(0));
+	
+	cvReleaseMat(&mapMatrix);
+	
+	return rotated;
+}
+
+#define PredictScale 3.0f
+
+CvRect enlargeCvRect(CvRect r){
+	CGPoint midPoint = CGPointMake(r.x+r.width/2, r.y+r.height/2);
+	return cvRect(midPoint.x-r.width*PredictScale/2, midPoint.y-r.height*PredictScale/2, 
+					  r.width*PredictScale, r.height*PredictScale);
+}
 
 - (void)dealloc {
 	AudioServicesDisposeSystemSoundID(alertSoundID);
@@ -126,7 +153,16 @@
 		
 		cvSetErrMode(CV_ErrModeParent);
 		
-		test_image = [self CreateIplImageFromUIImage:uiImage];
+		IplImage *temp_image = [self CreateIplImageFromUIImage:uiImage];
+		
+		NSLog(@"IplImage: %f", -[start timeIntervalSinceNow]);
+		self.start = [NSDate date];		
+		
+		test_image = transposeImage(temp_image);		
+		cvReleaseImage(&temp_image);
+		
+		NSLog(@"Rotate IplImage: %f", -[start timeIntervalSinceNow]);
+		self.start = [NSDate date];
 		
 		// Scaling down		
 		cvCvtColor( test_image, gray, CV_BGR2GRAY );
@@ -134,8 +170,18 @@
 		cvEqualizeHist( small_image, small_image );
 		
 		// Detect faces and draw rectangle on them
+//		if (lastFoundRect.width != 0) {
+//			cvSetImageROI(small_image, lastFoundRect);
+//		}else {
+//			cvResetImageROI(small_image);
+//		}
+
+		
 		CvSeq* faces = cvHaarDetectObjects(small_image, cascade, storage, 1.5f, 2, CV_HAAR_DO_CANNY_PRUNING, cvSize(20, 20));
-				
+		
+		NSLog(@"Detect Face: %f", -[start timeIntervalSinceNow]);
+		self.start = [NSDate date];
+		
 		// Draw results on the iamge
 		for(int i = 0; i < 10; i++) {
 			if (i >= faces->total) {
@@ -143,15 +189,28 @@
 					[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectZero]];
 				}
 			}else{
+
 				CvRect cvrect = *(CvRect*)cvGetSeqElem(faces, i);
 				[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale)]];
+//				if (i == 0) {
+//					// Optimization: One face found, most common scenario, cache the location as ROI
+//					lastFoundRect = enlargeCvRect(cvrect);
+//				}
 			}
 		}
 		
-		[overlayView setNeedsDisplay];
+//		if (faces->total == 0) {
+//			lastFoundRect.width = lastFoundRect.height = 0;
+//		}
+		[overlayView performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:NO];
+		//[overlayView setNeedsDisplay];
 		
 		//Need to release IplImage from CreateIplImageFromUIImage()
 		cvReleaseImage(&test_image);
+
+		
+		NSLog(@"Draw Result: %f", -[start timeIntervalSinceNow]);
+		start = nil;
 		
 		processingImage = NO;		
 	}
@@ -239,13 +298,15 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 		return;
 	}
 	
+	self.start = [NSDate date];
+	
 	UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
 	//imageView.image = image;
 
 	
-	[self performSelectorOnMainThread:@selector(detectFace:) withObject:image waitUntilDone:NO];
-
-	//[self detectFace:image];
+	//[self performSelectorOnMainThread:@selector(detectFace:) withObject:image waitUntilDone:NO];
+	
+	[self detectFace:image];
 }
 
 // Create a UIImage from sample buffer data
@@ -280,10 +341,19 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     CGContextRelease(context); 
     CGColorSpaceRelease(colorSpace);
 	
+	NSLog(@"Buffer to CGImage: %f", -[start timeIntervalSinceNow]);
+	self.start = [NSDate date];
+	
+	
     // Create an image object from the Quartz image
 	// Rotate for image taken from back camera
-	//UIImage *image = [UIImage imageWithCGImage:quartzImage scale:(CGFloat)1.0 orientation:UIImageOrientationRight];	
-	UIImage *image = [UIImage imageWithCGImage:[self CGImageRotatedByAngle:quartzImage angle:-90]];	
+	UIImage *image = [UIImage imageWithCGImage:quartzImage];	
+	//UIImage *image = [UIImage imageWithCGImage:[self CGImageRotatedByAngle:quartzImage angle:-90]];	
+	
+	
+	NSLog(@"Rotate CGImage: %f", -[start timeIntervalSinceNow]);
+	self.start = [NSDate date];
+	
     // Release the Quartz image
     CGImageRelease(quartzImage);
 	

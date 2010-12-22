@@ -26,11 +26,13 @@
 	IplImage *gray; 
 	
 	NSDate *start;
+	CvRect lastFoundRect;
 	
 }
 
 @property (nonatomic, retain) UIView *previewView;
 @property (nonatomic, retain) AnonymousOverlayView *overlayView;
+@property (nonatomic, retain) NSDate *start;
 
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
 

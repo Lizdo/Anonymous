@@ -50,7 +50,8 @@ CGRect enlargeRect(CGRect r){
 		
 		if (!CGRectEqualToRect(rect,CGRectZero)) {
 			if(overlayImage) {
-				CGContextDrawImage(contextRef, enlargeRect(rect), overlayImage.CGImage);
+				//CGContextDrawImage(contextRef, , overlayImage.CGImage);
+				[overlayImage drawInRect:enlargeRect(rect)];
 			} else {
 				CGContextStrokeRect(contextRef, rect);
 			}
