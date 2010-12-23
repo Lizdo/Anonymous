@@ -8,6 +8,7 @@
 #define FrameBufferHeight 480
 #define DetectScale 4
 #define LogTime 1
+#define TimeToPredict 6
 
 
 IplImage* transposeImage(IplImage* image) {
@@ -35,6 +36,19 @@ CvRect enlargeCvRect(CvRect r){
 	CGPoint midPoint = CGPointMake(r.x+r.width/2, r.y+r.height/2);
 	return cvRect(midPoint.x-r.width*PredictScale/2, midPoint.y-r.height*PredictScale/2, 
 					  r.width*PredictScale, r.height*PredictScale);
+}
+
+CGRect predictedRect(CGRect rect2, CGRect rect1){
+	if (CGRectEqualToRect(rect2, CGRectZero) || CGRectEqualToRect(rect1, CGRectZero)) {
+		return CGRectZero;
+	}
+	float width = rect2.size.width + (rect1.size.width - rect2.size.width) * 2;
+	float height = rect2.size.height + (rect1.size.height - rect2.size.height) * 2;
+	
+	float x = rect2.origin.x + (rect1.origin.x - rect2.origin.x) * 2;
+	float y = rect2.origin.y + (rect1.origin.y - rect2.origin.y) * 2;	
+	
+	return CGRectMake(x, y, width, height);
 }
 
 - (void)dealloc {
@@ -191,9 +205,29 @@ CvRect enlargeCvRect(CvRect r){
 					[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectZero]];
 				}
 			}else{
-
 				CvRect cvrect = *(CvRect*)cvGetSeqElem(faces, i);
-				[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale)]];
+				CGRect r = CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale);
+				[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:r]];
+				//Cache the previous face for prediction
+				if (i = 0) {
+					previousFace2 = previousFace1;
+					previousFace1 = r;
+				}
+
+			}
+		}
+		
+		
+		// If no face found, do a simple prediction
+		if (faces->total == 0) {
+			notFoundCount++;
+			if (notFoundCount >= TimeToPredict) {
+				//More than 0.5s not found, remove the face
+				notFoundCount = 0;
+				previousFace1 = previousFace2 = CGRectZero;
+			}else {
+				CGRect r = predictedRect(previousFace2, previousFace1);
+				[overlayView.rects replaceObjectAtIndex:1 withObject:[NSValue valueWithCGRect:r]];
 			}
 		}
 		

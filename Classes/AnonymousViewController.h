@@ -26,7 +26,10 @@
 	IplImage *gray; 
 	
 	NSDate *start;
-	CvRect lastFoundRect;
+	
+	CGRect previousFace1;
+	CGRect previousFace2;
+	int notFoundCount;
 	
 }
 
