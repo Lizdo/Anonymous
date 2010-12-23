@@ -7,7 +7,7 @@
 #define FrameBufferWidth 360
 #define FrameBufferHeight 480
 #define DetectScale 4
-#define LogTime 1
+#define LogTime 0
 #define TimeToPredict 6
 
 
@@ -255,7 +255,6 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
 
 	NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Grab" ofType:@"aif"] isDirectory:NO];
 	AudioServicesCreateSystemSoundID((CFURLRef)url, &alertSoundID);
@@ -402,7 +401,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	
 	//Flash to white
 	AudioServicesPlaySystemSound(alertSoundID);
-	[self performSelectorInBackground:@selector(actualSave) withObject:nil];						 
 
 	UIView *white = [[UIView alloc] initWithFrame:self.view.bounds];
 	white.backgroundColor = [UIColor whiteColor];
@@ -412,6 +410,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 					 animations:^{white.alpha = 1.0;}
 					 completion:^(BOOL finished){
 						 [white performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
+						 //Save after Anim/Sound to avoid clutter...
+						 [self performSelector:@selector(actualSave) withObject:nil afterDelay:0.2];				 
 					 }]; 
 }
 

@@ -30,6 +30,12 @@
 		6E58911F12BF9F120030818A /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E58911E12BF9F120030818A /* haarcascade_frontalface_alt.xml */; };
 		6E58947012C325F20030818A /* UIView+SaveToImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E58946F12C325F20030818A /* UIView+SaveToImage.m */; };
 		6E5894C612C365550030818A /* Grab.aif in Resources */ = {isa = PBXBuildFile; fileRef = 6E5894C512C365550030818A /* Grab.aif */; };
+		6E58950912C37D410030818A /* CameraButton_Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950312C37D410030818A /* CameraButton_Down.png */; };
+		6E58950A12C37D410030818A /* CameraButton_Down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950412C37D410030818A /* CameraButton_Down@2x.png */; };
+		6E58950B12C37D410030818A /* CameraButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950512C37D410030818A /* CameraButton.png */; };
+		6E58950C12C37D410030818A /* CameraButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950612C37D410030818A /* CameraButton@2x.png */; };
+		6E58950D12C37D410030818A /* Toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950712C37D410030818A /* Toolbar.png */; };
+		6E58950E12C37D410030818A /* Toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950812C37D410030818A /* Toolbar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +68,12 @@
 		6E58946E12C325F20030818A /* UIView+SaveToImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SaveToImage.h"; sourceTree = "<group>"; };
 		6E58946F12C325F20030818A /* UIView+SaveToImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SaveToImage.m"; sourceTree = "<group>"; };
 		6E5894C512C365550030818A /* Grab.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = Grab.aif; sourceTree = "<group>"; };
+		6E58950312C37D410030818A /* CameraButton_Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraButton_Down.png; sourceTree = "<group>"; };
+		6E58950412C37D410030818A /* CameraButton_Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CameraButton_Down@2x.png"; sourceTree = "<group>"; };
+		6E58950512C37D410030818A /* CameraButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraButton.png; sourceTree = "<group>"; };
+		6E58950612C37D410030818A /* CameraButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CameraButton@2x.png"; sourceTree = "<group>"; };
+		6E58950712C37D410030818A /* Toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Toolbar.png; sourceTree = "<group>"; };
+		6E58950812C37D410030818A /* Toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toolbar@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +124,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6E58950112C37D2D0030818A /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -171,6 +184,19 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		6E58950112C37D2D0030818A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6E58950312C37D410030818A /* CameraButton_Down.png */,
+				6E58950412C37D410030818A /* CameraButton_Down@2x.png */,
+				6E58950512C37D410030818A /* CameraButton.png */,
+				6E58950612C37D410030818A /* CameraButton@2x.png */,
+				6E58950712C37D410030818A /* Toolbar.png */,
+				6E58950812C37D410030818A /* Toolbar@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -228,6 +254,12 @@
 				54BBAF3D0F04148D00568ED9 /* Tink.aiff in Resources */,
 				6E58911F12BF9F120030818A /* haarcascade_frontalface_alt.xml in Resources */,
 				6E5894C612C365550030818A /* Grab.aif in Resources */,
+				6E58950912C37D410030818A /* CameraButton_Down.png in Resources */,
+				6E58950A12C37D410030818A /* CameraButton_Down@2x.png in Resources */,
+				6E58950B12C37D410030818A /* CameraButton.png in Resources */,
+				6E58950C12C37D410030818A /* CameraButton@2x.png in Resources */,
+				6E58950D12C37D410030818A /* Toolbar.png in Resources */,
+				6E58950E12C37D410030818A /* Toolbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
