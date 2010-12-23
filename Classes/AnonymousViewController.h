@@ -5,6 +5,8 @@
 #import <CoreMedia/CoreMedia.h>
 #import <opencv/cv.h>
 
+#import "UIView+SaveToImage.h"
+
 
 @class AnonymousOverlayView;
 
@@ -25,6 +27,8 @@
 	IplImage *small_image;
 	IplImage *gray; 
 	
+	UIImage *previewImage;
+	
 	NSDate *start;
 	
 	CGRect previousFace1;
@@ -34,9 +38,11 @@
 }
 
 @property (nonatomic, retain) UIView *previewView;
+@property (nonatomic, retain) UIImage *previewImage;
 @property (nonatomic, retain) AnonymousOverlayView *overlayView;
 @property (nonatomic, retain) NSDate *start;
 
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
+- (IBAction)saveImage;
 
 @end

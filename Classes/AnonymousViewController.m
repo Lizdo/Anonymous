@@ -2,7 +2,7 @@
 #import "AnonymousOverlayView.h"
 
 @implementation AnonymousViewController
-@synthesize previewView, overlayView, start;
+@synthesize previewView, overlayView, start, previewImage;
 
 #define FrameBufferWidth 360
 #define FrameBufferHeight 480
@@ -257,7 +257,7 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 	[super viewDidLoad];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
 
-	NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Tink" ofType:@"aiff"] isDirectory:NO];
+	NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Grab" ofType:@"aif"] isDirectory:NO];
 	AudioServicesCreateSystemSoundID((CFURLRef)url, &alertSoundID);
 
 	[self prepareToDetectFace];
@@ -381,8 +381,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	
     // Create an image object from the Quartz image
 	// Rotate for image taken from back camera
-	UIImage *image = [UIImage imageWithCGImage:quartzImage];	
-	//UIImage *image = [UIImage imageWithCGImage:[self CGImageRotatedByAngle:quartzImage angle:-90]];	
+	self.previewImage = [UIImage imageWithCGImage:quartzImage scale:1 orientation:UIImageOrientationRight];
+	//self.previewImage = [UIImage imageWithCGImage:[self CGImageRotatedByAngle:quartzImage angle:-90]];
+	UIImage * image = [UIImage imageWithCGImage:quartzImage];
 	
 	if (LogTime) {
 		NSLog(@"Rotate CGImage: %f", -[start timeIntervalSinceNow]);
@@ -394,6 +395,49 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	
     return (image);
 }
+
+//Freeze the image and write to a imageView
+- (void)saveImage{
+	[session stopRunning];
+	
+	//Flash to white
+	AudioServicesPlaySystemSound(alertSoundID);
+	[self performSelectorInBackground:@selector(actualSave) withObject:nil];						 
+
+	UIView *white = [[UIView alloc] initWithFrame:self.view.bounds];
+	white.backgroundColor = [UIColor whiteColor];
+	white.alpha = 0;
+	[self.view addSubview:white];
+	[UIView animateWithDuration:0.2
+					 animations:^{white.alpha = 1.0;}
+					 completion:^(BOOL finished){
+						 [white performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1];
+					 }]; 
+}
+
+- (void)actualSave{
+	// Do the actual save here 
+	CGSize size = previewView.frame.size;
+	UIGraphicsBeginImageContext(size);
+	
+	[previewImage drawAtPoint:CGPointZero];
+	
+	UIImage* overlay = [overlayView renderToImage];
+	[overlay drawAtPoint:CGPointZero];	
+	
+	UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	UIImageWriteToSavedPhotosAlbum(result, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)               image: (UIImage *) image
+    didFinishSavingWithError: (NSError *) error
+                 contextInfo: (void *) contextInfo{
+	[session startRunning];
+}
+
+
 
 
 
