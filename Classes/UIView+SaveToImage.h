@@ -6,7 +6,8 @@
 //  Copyright 2010 StupidTent co. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface UIView (SaveToImage) 

@@ -398,7 +398,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 //Freeze the image and write to a imageView
 - (void)saveImage{
 	[session stopRunning];
-	
+	takePictureButton.enabled = NO;
 	//Flash to white
 	AudioServicesPlaySystemSound(alertSoundID);
 
@@ -435,6 +435,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     didFinishSavingWithError: (NSError *) error
                  contextInfo: (void *) contextInfo{
 	[session startRunning];
+	takePictureButton.enabled = YES;
 }
 
 

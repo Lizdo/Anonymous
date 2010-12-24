@@ -36,6 +36,9 @@
 		6E58950C12C37D410030818A /* CameraButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950612C37D410030818A /* CameraButton@2x.png */; };
 		6E58950D12C37D410030818A /* Toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950712C37D410030818A /* Toolbar.png */; };
 		6E58950E12C37D410030818A /* Toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950812C37D410030818A /* Toolbar@2x.png */; };
+		6E58956E12C48F180030818A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E58956D12C48F180030818A /* QuartzCore.framework */; };
+		6E58959012C492060030818A /* CameraButton_Disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58958E12C492060030818A /* CameraButton_Disabled.png */; };
+		6E58959112C492060030818A /* CameraButton_Disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58958F12C492060030818A /* CameraButton_Disabled@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +77,9 @@
 		6E58950612C37D410030818A /* CameraButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CameraButton@2x.png"; sourceTree = "<group>"; };
 		6E58950712C37D410030818A /* Toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Toolbar.png; sourceTree = "<group>"; };
 		6E58950812C37D410030818A /* Toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Toolbar@2x.png"; sourceTree = "<group>"; };
+		6E58956D12C48F180030818A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6E58958E12C492060030818A /* CameraButton_Disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraButton_Disabled.png; sourceTree = "<group>"; };
+		6E58958F12C492060030818A /* CameraButton_Disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CameraButton_Disabled@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +98,7 @@
 				6E11C80412BDE84F00D71A6F /* CoreMedia.framework in Frameworks */,
 				6E11C80612BDE84F00D71A6F /* CoreVideo.framework in Frameworks */,
 				6E11C80812BDE85C00D71A6F /* AVFoundation.framework in Frameworks */,
+				6E58956E12C48F180030818A /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +170,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E58956D12C48F180030818A /* QuartzCore.framework */,
 				6E11C80312BDE84F00D71A6F /* CoreMedia.framework */,
 				6E11C80512BDE84F00D71A6F /* CoreVideo.framework */,
 				6E11C80712BDE85C00D71A6F /* AVFoundation.framework */,
@@ -187,6 +195,8 @@
 		6E58950112C37D2D0030818A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E58958E12C492060030818A /* CameraButton_Disabled.png */,
+				6E58958F12C492060030818A /* CameraButton_Disabled@2x.png */,
 				6E58950312C37D410030818A /* CameraButton_Down.png */,
 				6E58950412C37D410030818A /* CameraButton_Down@2x.png */,
 				6E58950512C37D410030818A /* CameraButton.png */,
@@ -260,6 +270,8 @@
 				6E58950C12C37D410030818A /* CameraButton@2x.png in Resources */,
 				6E58950D12C37D410030818A /* Toolbar.png in Resources */,
 				6E58950E12C37D410030818A /* Toolbar@2x.png in Resources */,
+				6E58959012C492060030818A /* CameraButton_Disabled.png in Resources */,
+				6E58959112C492060030818A /* CameraButton_Disabled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

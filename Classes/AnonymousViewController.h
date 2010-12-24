@@ -15,6 +15,7 @@
 	
 	IBOutlet UIView *previewView;
 	IBOutlet AnonymousOverlayView *overlayView;	
+	IBOutlet UIButton *takePictureButton;	
 
 	BOOL processingImage;
 	

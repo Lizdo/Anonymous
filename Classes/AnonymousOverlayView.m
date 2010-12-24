@@ -17,9 +17,33 @@ CGRect enlargeRect(CGRect r){
 }
 
 
+@implementation AnonymousOverlay
+
+@synthesize image, offsetToFace, sizeRatio;
+
++ (id)AnonymousOverlayWithImage:(UIImage *)image{
+	AnonymousOverlay * overlay = [[AnonymousOverlay alloc] init];
+	overlay.image = image;
+	overlay.offsetToFace = CGPointZero;
+	overlay.sizeRatio = EnlargeScale;
+	return [overlay autorelease];
+}
+
+- (CGRect)overlayRectFromFaceRect:(CGRect)faceRect{
+	CGPoint faceOrigin = faceRect.origin;
+	CGPoint origin = CGPointMake(faceOrigin.x + offsetToFace.x*sizeRatio,
+								 faceOrigin.y + offsetToFace.y*sizeRatio);
+	float size = faceRect.size.width*sizeRatio;
+	return CGRectMake(origin.x, origin.y, size, size);
+}
+
+@end
+
+
+
 @implementation AnonymousOverlayView
 
-@synthesize rects, overlayImage;
+@synthesize rects, overlay;
 
 // The view is created from interface builder
 - (id)initWithCoder:(NSCoder *)decoder{
@@ -31,7 +55,7 @@ CGRect enlargeRect(CGRect r){
 			[rects addObject:[NSValue valueWithCGRect:CGRectZero]];
 		}
 		// Default Overlay
-		self.overlayImage = [UIImage imageNamed:@"laughing_man.png"];
+		self.overlay = [AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]];
     }
     return self;
 }
@@ -49,9 +73,9 @@ CGRect enlargeRect(CGRect r){
 		CGRect rect = [object CGRectValue];
 		
 		if (!CGRectEqualToRect(rect,CGRectZero)) {
-			if(overlayImage) {
+			if(overlay) {
 				//CGContextDrawImage(contextRef, , overlayImage.CGImage);
-				[overlayImage drawInRect:enlargeRect(rect)];
+				[[overlay image] drawInRect:[overlay overlayRectFromFaceRect:rect]];
 			} else {
 				CGContextStrokeRect(contextRef, rect);
 			}
@@ -65,7 +89,7 @@ CGRect enlargeRect(CGRect r){
 - (void)dealloc {
 	[rects removeAllObjects];
 	rects = nil;
-	overlayImage = nil;
+	overlay = nil;
     [super dealloc];
 }
 

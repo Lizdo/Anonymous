@@ -25,3 +25,5 @@
 	UIGraphicsEndImageContext();  
 	return image;
 }
+
+@end

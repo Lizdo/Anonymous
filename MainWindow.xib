@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="10"/>
+			<integer value="12"/>
 			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -67,7 +67,7 @@
 							<int key="NSvFlags">274</int>
 							<string key="NSFrameSize">{320, 446}</string>
 							<reference key="NSSuperview" ref="453656443"/>
-							<object class="NSColor" key="IBUIBackgroundColor" id="538987436">
+							<object class="NSColor" key="IBUIBackgroundColor" id="671446210">
 								<int key="NSColorSpace">3</int>
 								<bytes key="NSWhite">MAA</bytes>
 							</object>
@@ -84,7 +84,7 @@
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
-						<object class="IBUIImageView" id="611370142">
+						<object class="IBUIImageView" id="97793738">
 							<reference key="NSNextResponder" ref="453656443"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{0, 420}, {320, 60}}</string>
@@ -129,6 +129,10 @@
 								<string key="NSClassName">NSImage</string>
 								<string key="NSResourceName">CameraButton_Down.png</string>
 							</object>
+							<object class="NSCustomResource" key="IBUIDisabledImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">CameraButton_Disabled.png</string>
+							</object>
 							<object class="NSCustomResource" key="IBUINormalImage">
 								<string key="NSClassName">NSImage</string>
 								<string key="NSResourceName">CameraButton.png</string>
@@ -137,7 +141,7 @@
 					</object>
 					<string key="NSFrameSize">{320, 480}</string>
 					<reference key="NSSuperview"/>
-					<reference key="IBUIBackgroundColor" ref="538987436"/>
+					<reference key="IBUIBackgroundColor" ref="671446210"/>
 					<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
@@ -200,6 +204,14 @@
 					</object>
 					<int key="connectionID">39</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">takePictureButton</string>
+						<reference key="source" ref="943309135"/>
+						<reference key="destination" ref="26946530"/>
+					</object>
+					<int key="connectionID">41</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -251,7 +263,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="97644860"/>
 							<reference ref="590289214"/>
-							<reference ref="611370142"/>
+							<reference ref="97793738"/>
 							<reference ref="26946530"/>
 						</object>
 						<reference key="parent" ref="943309135"/>
@@ -281,7 +293,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
-						<reference key="object" ref="611370142"/>
+						<reference key="object" ref="97793738"/>
 						<reference key="parent" ref="453656443"/>
 					</object>
 				</object>
@@ -315,7 +327,7 @@
 					<string>UIApplication</string>
 					<string>UIResponder</string>
 					<string>AnonymousViewController</string>
-					<string>{{542, 137}, {320, 480}}</string>
+					<string>{{593, 174}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableDictionary">
@@ -336,7 +348,7 @@
 					<object class="NSAffineTransform"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC3AAAw+UAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABC3AAAw+8AAA</bytes>
 					</object>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+UAAA</bytes>
@@ -359,7 +371,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">41</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -432,11 +444,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>overlayView</string>
 							<string>previewView</string>
+							<string>takePictureButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>AnonymousOverlayView</string>
 							<string>UIView</string>
+							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -445,6 +459,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>overlayView</string>
 							<string>previewView</string>
+							<string>takePictureButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -455,6 +470,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">previewView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">takePictureButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 						</object>
 					</object>
@@ -541,6 +560,20 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">Foundation.framework/Headers/NSURLConnection.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">QuartzCore.framework/Headers/CAAnimation.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">QuartzCore.framework/Headers/CALayer.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -707,11 +740,13 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>CameraButton.png</string>
+				<string>CameraButton_Disabled.png</string>
 				<string>CameraButton_Down.png</string>
 				<string>Toolbar.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{100, 60}</string>
 				<string>{100, 60}</string>
 				<string>{100, 60}</string>
 				<string>{320, 60}</string>
