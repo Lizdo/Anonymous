@@ -397,8 +397,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 //Freeze the image and write to a imageView
 - (void)saveImage{
-	[session stopRunning];
-	takePictureButton.enabled = NO;
+	[self pauseCapture];
 	//Flash to white
 	AudioServicesPlaySystemSound(alertSoundID);
 
@@ -434,11 +433,28 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (void)               image: (UIImage *) image
     didFinishSavingWithError: (NSError *) error
                  contextInfo: (void *) contextInfo{
+	[self resumeCapture];
+}
+
+- (void)pauseCapture{
+	NSAssert(session, @"Capture Session not available.");
+	[session stopRunning];
+	takePictureButton.enabled = NO;
+}
+
+- (void)resumeCapture{
+	NSAssert(session, @"Capture Session not available.");	
 	[session startRunning];
 	takePictureButton.enabled = YES;
 }
 
+#pragma mark Handle Events
 
+- (IBAction)showConfig{
+	[self pauseCapture];
+	AnonymousOverlaySelectionView * overlaySelectionController = [[[AnonymousOverlaySelectionView alloc]initWithNibName:@"AnonymousOverlaySelectionView" bundle:nil]autorelease];
+	[self presentModalViewController:overlaySelectionController animated:YES];
+}
 
 
 

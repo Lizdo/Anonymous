@@ -6,7 +6,7 @@
 #import <opencv/cv.h>
 
 #import "UIView+SaveToImage.h"
-
+#import "AnonymousOverlaySelectionView.h"
 
 @class AnonymousOverlayView;
 
@@ -15,7 +15,7 @@
 	
 	IBOutlet UIView *previewView;
 	IBOutlet AnonymousOverlayView *overlayView;	
-	IBOutlet UIButton *takePictureButton;	
+	IBOutlet UIButton *takePictureButton;
 
 	BOOL processingImage;
 	
@@ -35,7 +35,6 @@
 	CGRect previousFace1;
 	CGRect previousFace2;
 	int notFoundCount;
-	
 }
 
 @property (nonatomic, retain) UIView *previewView;
@@ -45,5 +44,10 @@
 
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
 - (IBAction)saveImage;
+
+- (IBAction)showConfig;
+
+- (void)pauseCapture;
+- (void)resumeCapture;
 
 @end

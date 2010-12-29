@@ -39,6 +39,14 @@
 		6E58956E12C48F180030818A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E58956D12C48F180030818A /* QuartzCore.framework */; };
 		6E58959012C492060030818A /* CameraButton_Disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58958E12C492060030818A /* CameraButton_Disabled.png */; };
 		6E58959112C492060030818A /* CameraButton_Disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58958F12C492060030818A /* CameraButton_Disabled@2x.png */; };
+		6E6DEE4012CB837A00322BEB /* ConfigButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3A12CB837A00322BEB /* ConfigButton.png */; };
+		6E6DEE4112CB837A00322BEB /* ConfigButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3B12CB837A00322BEB /* ConfigButton@2x.png */; };
+		6E6DEE4212CB837A00322BEB /* EditButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3C12CB837A00322BEB /* EditButton.png */; };
+		6E6DEE4312CB837A00322BEB /* EditButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3D12CB837A00322BEB /* EditButton@2x.png */; };
+		6E6DEE4412CB837A00322BEB /* ResumeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3E12CB837A00322BEB /* ResumeButton.png */; };
+		6E6DEE4512CB837A00322BEB /* ResumeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3F12CB837A00322BEB /* ResumeButton@2x.png */; };
+		6E73758E12C85293002D9CED /* AnonymousOverlaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */; };
+		6E73758F12C85293002D9CED /* AnonymousOverlaySelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +88,15 @@
 		6E58956D12C48F180030818A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6E58958E12C492060030818A /* CameraButton_Disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraButton_Disabled.png; sourceTree = "<group>"; };
 		6E58958F12C492060030818A /* CameraButton_Disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CameraButton_Disabled@2x.png"; sourceTree = "<group>"; };
+		6E6DEE3A12CB837A00322BEB /* ConfigButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConfigButton.png; sourceTree = "<group>"; };
+		6E6DEE3B12CB837A00322BEB /* ConfigButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ConfigButton@2x.png"; sourceTree = "<group>"; };
+		6E6DEE3C12CB837A00322BEB /* EditButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EditButton.png; sourceTree = "<group>"; };
+		6E6DEE3D12CB837A00322BEB /* EditButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EditButton@2x.png"; sourceTree = "<group>"; };
+		6E6DEE3E12CB837A00322BEB /* ResumeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ResumeButton.png; sourceTree = "<group>"; };
+		6E6DEE3F12CB837A00322BEB /* ResumeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ResumeButton@2x.png"; sourceTree = "<group>"; };
+		6E73758B12C85293002D9CED /* AnonymousOverlaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlaySelectionView.h; sourceTree = "<group>"; };
+		6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlaySelectionView.m; sourceTree = "<group>"; };
+		6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AnonymousOverlaySelectionView.xib; path = Classes/AnonymousOverlaySelectionView.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +133,8 @@
 				1D3623250D0F684500981E51 /* AnonymousAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* AnonymousViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* AnonymousViewController.m */,
+				6E73758B12C85293002D9CED /* AnonymousOverlaySelectionView.h */,
+				6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -161,6 +180,7 @@
 				540ABCF50E3E280700E30885 /* Icon.png */,
 				5452E0090E3D08AA00FE4518 /* lena.jpg */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				549913C60E3E3D2100BD1311 /* Default.png */,
 			);
@@ -195,6 +215,12 @@
 		6E58950112C37D2D0030818A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E6DEE3A12CB837A00322BEB /* ConfigButton.png */,
+				6E6DEE3B12CB837A00322BEB /* ConfigButton@2x.png */,
+				6E6DEE3C12CB837A00322BEB /* EditButton.png */,
+				6E6DEE3D12CB837A00322BEB /* EditButton@2x.png */,
+				6E6DEE3E12CB837A00322BEB /* ResumeButton.png */,
+				6E6DEE3F12CB837A00322BEB /* ResumeButton@2x.png */,
 				6E58958E12C492060030818A /* CameraButton_Disabled.png */,
 				6E58958F12C492060030818A /* CameraButton_Disabled@2x.png */,
 				6E58950312C37D410030818A /* CameraButton_Down.png */,
@@ -204,7 +230,7 @@
 				6E58950712C37D410030818A /* Toolbar.png */,
 				6E58950812C37D410030818A /* Toolbar@2x.png */,
 			);
-			name = Images;
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +298,13 @@
 				6E58950E12C37D410030818A /* Toolbar@2x.png in Resources */,
 				6E58959012C492060030818A /* CameraButton_Disabled.png in Resources */,
 				6E58959112C492060030818A /* CameraButton_Disabled@2x.png in Resources */,
+				6E73758F12C85293002D9CED /* AnonymousOverlaySelectionView.xib in Resources */,
+				6E6DEE4012CB837A00322BEB /* ConfigButton.png in Resources */,
+				6E6DEE4112CB837A00322BEB /* ConfigButton@2x.png in Resources */,
+				6E6DEE4212CB837A00322BEB /* EditButton.png in Resources */,
+				6E6DEE4312CB837A00322BEB /* EditButton@2x.png in Resources */,
+				6E6DEE4412CB837A00322BEB /* ResumeButton.png in Resources */,
+				6E6DEE4512CB837A00322BEB /* ResumeButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +320,7 @@
 				540723E00E3DD25B00B598A2 /* AnonymousViewController.m in Sources */,
 				6E11C85812BDE8E100D71A6F /* AnonymousOverlayView.m in Sources */,
 				6E58947012C325F20030818A /* UIView+SaveToImage.m in Sources */,
+				6E73758E12C85293002D9CED /* AnonymousOverlaySelectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
