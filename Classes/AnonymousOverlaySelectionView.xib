@@ -101,7 +101,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Toolbar.png</string>
+									<string key="NSResourceName">Toolbar</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="993630765">
@@ -694,13 +694,13 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>EditButton.png</string>
 				<string>ResumeButton.png</string>
-				<string>Toolbar.png</string>
+				<string>Toolbar</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{50, 50}</string>
 				<string>{50, 50}</string>
-				<string>{320, 60}</string>
+				<string>{167, 31}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">132</string>

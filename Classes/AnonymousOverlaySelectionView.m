@@ -13,16 +13,18 @@
 
 - (void)setState:(OverlayItemState)newState{
 	if (newState == OverlayItemStateNormal) {
-		//Toggle Normal
+		// Toggle Normal
 		[UIView animateWithDuration:SlideAnimDuration animations:^{
 			imageView.frame = CGRectMake(0, 0, OverlayItemSize, OverlayItemSize);
 		}];
-		
+		// Add the normal Icon
+		self.isSelected = isSelected;		
 	}else if (newState == OverlayItemStateEdit) {
-		//Toggle Edit
+		// Toggle Edit
 		[UIView animateWithDuration:SlideAnimDuration animations:^{
 			imageView.frame = CGRectMake(0, 0, OverlayItemMinimalSize, OverlayItemMinimalSize);
-		}];		
+		}];
+		markerView.image = [UIImage imageNamed:@"EditMark.png"];
 	}
 	state = newState;
 }
@@ -30,6 +32,21 @@
 
 - (OverlayItemState)state{
 	return state;
+}
+
+- (void)setIsSelected:(BOOL)newBool{
+	if (newBool) {
+		markerView.image = [UIImage imageNamed:@"RightMark.png"];
+	}
+	else {
+		markerView.image = nil;
+	}
+	[self setNeedsDisplay];
+	isSelected = newBool;
+}
+
+- (BOOL)isSelected{
+	return isSelected;
 }
 
 + (id)anonymousOverlayItemWithOverlay:(AnonymousOverlay *)anOverlay{
@@ -44,9 +61,29 @@
 	[item addSubview:imageView];
 	[item setValue:imageView forKeyPath:@"imageView"];
 	
+	// Set MarkerView
+	CGRect markerRect = CGRectMake(item.bounds.size.width - OverlayItemMarkerSize,
+								   item.bounds.size.height - OverlayItemMarkerSize,
+								   OverlayItemMarkerSize,OverlayItemMarkerSize);
+	UIImageView *markerView = [[UIImageView alloc] initWithFrame:markerRect];
+	[item addSubview:markerView];
+	[item setValue:markerView forKeyPath:@"markerView"];
+	
+	UITapGestureRecognizer * recognizer = [[[UITapGestureRecognizer alloc]initWithTarget:item action:@selector(handleTap)]autorelease];
+	[item addGestureRecognizer:recognizer];
+	
 	return [item autorelease];
 }
 
+- (void)handleTap{
+	if (state == OverlayItemStateNormal) {
+		// Select Tapped Item
+		[controller selectOverlayItem:self];
+	}else if (state == OverlayItemStateEdit) {
+		// Edit Tapped Item
+		[controller editOverlayItem:self];
+	}
+}
 
 @end
 
@@ -88,8 +125,12 @@
 	
 	for (int i = 0; i < dataSource.count; i++) {
 		AnonymousOverlayItem * item = [AnonymousOverlayItem anonymousOverlayItemWithOverlay:[dataSource objectAtIndex:i]];
+		[item setValue:self forKeyPath:@"controller"];				
 		[scrollView addSubview:item];
-		item.center = [self centerForItemID:i];		
+		item.center = [self centerForItemID:i];	
+		if (i == 0) {
+			item.isSelected = YES;
+		}
 	}
 	
     [super viewDidLoad];
@@ -151,6 +192,24 @@
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 
 }
+
+- (void)editOverlayItem:(AnonymousOverlayItem *)item{
+	
+}
+
+- (void)selectOverlayItem:(AnonymousOverlayItem *)selectedItem{
+	for (UIView * item in scrollView.subviews) {
+		if ([item isKindOfClass:[AnonymousOverlayItem class]]) {
+			if (selectedItem != item){
+				((AnonymousOverlayItem *)item).isSelected = NO;
+			}		
+		}
+	}
+	selectedItem.isSelected = YES;
+	
+	//TODO: Set the current overlay here
+}
+
 
 #pragma mark Helper Functions
 

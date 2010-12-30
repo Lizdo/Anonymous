@@ -16,12 +16,15 @@
 #pragma mark -
 #pragma mark OverlayItem Functions
 
-#define OverlayItemSize 90
+#define OverlayItemSize 80
 #define OverlayItemMinimalSize 70
+#define OverlayItemMarkerSize 30
 
 #define ItemsPerRow 3
 
 #define SlideAnimDuration 0.3f
+
+@class AnonymousOverlaySelectionView;
 
 typedef enum {
 	OverlayItemStateNormal,
@@ -36,9 +39,15 @@ typedef enum {
 	OverlayItemState state;
 	
 	UIImageView * imageView;
+	UIImageView * markerView;
+	
+	BOOL isSelected;
+	
+	AnonymousOverlaySelectionView * controller;
 }
 
 @property (nonatomic) OverlayItemState state;
+@property (nonatomic) BOOL isSelected;
 
 + (id)anonymousOverlayItemWithOverlay:(AnonymousOverlay *)anOverlay;
 
@@ -62,9 +71,8 @@ typedef enum {
 
 #pragma mark OverlayButton Functions
 
-- (void)editOverlayWithID:(int)overlayID;
-- (void)deleteOverlayWithID:(int)overlayID;
-- (void)addNewOverlay;
+- (void)editOverlayItem:(AnonymousOverlayItem *)item;
+- (void)selectOverlayItem:(AnonymousOverlayItem *)item;
 
 #pragma mark Toolbar Functions
 
