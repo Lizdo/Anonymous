@@ -17,15 +17,36 @@ CGRect enlargeRect(CGRect r){
 }
 
 
+#pragma mark NSCoding for UIImage
+
+@interface UIImage (NSCoding)
+- (id)initWithCoder:(NSCoder *)decoder;
+- (void)encodeWithCoder:(NSCoder *)encoder;
+@end
+
+@implementation UIImage (NSCoding)
+- (id)initWithCoder:(NSCoder *)decoder {
+	NSData *pngData = [decoder decodeObjectForKey:@"PNGRepresentation"];
+	[self autorelease];
+	self = [[UIImage alloc] initWithData:pngData];
+	return self;
+}
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:UIImagePNGRepresentation(self) forKey:@"PNGRepresentation"];
+}
+@end
+
+
 @implementation AnonymousOverlay
 
-@synthesize image, offsetToFace, sizeRatio;
+@synthesize image, offsetToFace, sizeRatio, isSelected;
 
 + (id)AnonymousOverlayWithImage:(UIImage *)image{
 	AnonymousOverlay * overlay = [[AnonymousOverlay alloc] init];
 	overlay.image = image;
 	overlay.offsetToFace = CGPointZero;
 	overlay.sizeRatio = EnlargeScale;
+	overlay.isSelected = NO;	
 	return [overlay autorelease];
 }
 
@@ -36,6 +57,29 @@ CGRect enlargeRect(CGRect r){
 	float size = faceRect.size.width*sizeRatio;
 	return CGRectMake(origin.x, origin.y, size, size);
 }
+
+#pragma mark NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)coder{
+	[coder encodeObject:image forKey:@"image"];
+	[coder encodeCGPoint:offsetToFace forKey:@"offsetToFace"];
+	[coder encodeFloat:sizeRatio forKey:@"sizeRatio"];
+	[coder encodeBool:isSelected forKey:@"isSelected"];
+	
+}
+
+- (id)initWithCoder:(NSCoder *)coder{
+	//NSObject does not support NSCoding
+	if (self = [super init]) {
+		//retain image
+        self.image = [coder decodeObjectForKey:@"image"];
+		offsetToFace = [coder decodeCGPointForKey:@"offsetToFace"];
+		sizeRatio = [coder decodeFloatForKey:@"sizeRatio"];
+		isSelected = [coder decodeBoolForKey:@"isSelected"];
+    }
+    return (self);
+}
+
 
 @end
 

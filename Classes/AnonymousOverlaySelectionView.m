@@ -9,6 +9,8 @@
 #import "AnonymousOverlaySelectionView.h"
 #import "AnonymousViewController.h"
 
+#import "AnonymousAppDelegate.h"
+
 @implementation AnonymousOverlayItem
 
 - (void)setState:(OverlayItemState)newState{
@@ -42,11 +44,11 @@
 		markerView.image = nil;
 	}
 	[self setNeedsDisplay];
-	isSelected = newBool;
+	overlay.isSelected = newBool;
 }
 
 - (BOOL)isSelected{
-	return isSelected;
+	return overlay.isSelected;
 }
 
 + (id)anonymousOverlayItemWithOverlay:(AnonymousOverlay *)anOverlay{
@@ -101,11 +103,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
 	// TODO: Load overlays from the save file
 	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		dataSource = [[NSArray arrayWithObjects:[AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]],
-					   [AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]],
-					   [AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]],
-					   nil
-					   ] retain];
+		//load from app delegate
+		dataSource = ((AnonymousAppDelegate *)[UIApplication sharedApplication].delegate).overlays;
 	}
 	return self;
 }

@@ -12,15 +12,18 @@
 
 
 // Container object for all the preview overlays
-@interface AnonymousOverlay : NSObject{
+@interface AnonymousOverlay : NSObject <NSCoding>{
 	UIImage * image;
 	CGPoint offsetToFace;
 	float sizeRatio;
+	BOOL isSelected;
 }
 
 @property (nonatomic,retain) UIImage * image;
 @property (nonatomic) CGPoint offsetToFace;
 @property (nonatomic) float sizeRatio;
+@property (nonatomic) BOOL isSelected;
+
 
 + (id)AnonymousOverlayWithImage:(UIImage *)image;
 - (CGRect)overlayRectFromFaceRect:(CGRect)faceRect;

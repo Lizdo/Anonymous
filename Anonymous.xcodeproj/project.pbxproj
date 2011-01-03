@@ -23,6 +23,8 @@
 		54BBAF4F0F0414C200568ED9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BBAF4E0F0414C200568ED9 /* AudioToolbox.framework */; };
 		54ED862C123C4A8B00ED9656 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ED862B123C4A8B00ED9656 /* Accelerate.framework */; };
 		54FC5BDE0E3EB3EB00F48645 /* laughing_man.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */; };
+		6E095E9312D219020060C33A /* AnonymousOverlayEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */; };
+		6E095E9412D219020060C33A /* AnonymousOverlayEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */; };
 		6E11C80412BDE84F00D71A6F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11C80312BDE84F00D71A6F /* CoreMedia.framework */; };
 		6E11C80612BDE84F00D71A6F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11C80512BDE84F00D71A6F /* CoreVideo.framework */; };
 		6E11C80812BDE85C00D71A6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11C80712BDE85C00D71A6F /* AVFoundation.framework */; };
@@ -76,6 +78,9 @@
 		54BBAF4E0F0414C200568ED9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		54ED862B123C4A8B00ED9656 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laughing_man.png; sourceTree = "<group>"; };
+		6E095E9012D219020060C33A /* AnonymousOverlayEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlayEditView.h; sourceTree = "<group>"; };
+		6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlayEditView.m; sourceTree = "<group>"; };
+		6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AnonymousOverlayEditView.xib; path = Classes/AnonymousOverlayEditView.xib; sourceTree = "<group>"; };
 		6E11C80312BDE84F00D71A6F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		6E11C80512BDE84F00D71A6F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		6E11C80712BDE85C00D71A6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -147,6 +152,8 @@
 				28D7ACF70DDB3853001CB0EB /* AnonymousViewController.m */,
 				6E73758B12C85293002D9CED /* AnonymousOverlaySelectionView.h */,
 				6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */,
+				6E095E9012D219020060C33A /* AnonymousOverlayEditView.h */,
+				6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -192,6 +199,7 @@
 				540ABCF50E3E280700E30885 /* Icon.png */,
 				5452E0090E3D08AA00FE4518 /* lena.jpg */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */,
 				6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				549913C60E3E3D2100BD1311 /* Default.png */,
@@ -329,6 +337,7 @@
 				6E49E68612CCD7CB00A577C6 /* RightMark.png in Resources */,
 				6E49E68712CCD7CB00A577C6 /* EditMark@2x.png in Resources */,
 				6E49E68812CCD7CB00A577C6 /* EditMark.png in Resources */,
+				6E095E9412D219020060C33A /* AnonymousOverlayEditView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +354,7 @@
 				6E11C85812BDE8E100D71A6F /* AnonymousOverlayView.m in Sources */,
 				6E58947012C325F20030818A /* UIView+SaveToImage.m in Sources */,
 				6E73758E12C85293002D9CED /* AnonymousOverlaySelectionView.m in Sources */,
+				6E095E9312D219020060C33A /* AnonymousOverlayEditView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

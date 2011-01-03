@@ -40,9 +40,7 @@ typedef enum {
 	
 	UIImageView * imageView;
 	UIImageView * markerView;
-	
-	BOOL isSelected;
-	
+		
 	AnonymousOverlaySelectionView * controller;
 }
 
