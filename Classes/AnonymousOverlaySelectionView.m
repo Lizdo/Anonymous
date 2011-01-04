@@ -8,10 +8,15 @@
 
 #import "AnonymousOverlaySelectionView.h"
 #import "AnonymousViewController.h"
+#import "AnonymousOverlayEditView.h"
 
 #import "AnonymousAppDelegate.h"
 
 @implementation AnonymousOverlayItem
+
+- (AnonymousOverlay *)overlay{
+	return overlay;
+}
 
 - (void)setState:(OverlayItemState)newState{
 	if (newState == OverlayItemStateNormal) {
@@ -20,7 +25,7 @@
 			imageView.frame = CGRectMake(0, 0, OverlayItemSize, OverlayItemSize);
 		}];
 		// Add the normal Icon
-		self.isSelected = isSelected;		
+		self.isSelected = overlay.isSelected;		
 	}else if (newState == OverlayItemStateEdit) {
 		// Toggle Edit
 		[UIView animateWithDuration:SlideAnimDuration animations:^{
@@ -193,7 +198,10 @@
 }
 
 - (void)editOverlayItem:(AnonymousOverlayItem *)item{
-	
+	self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	AnonymousOverlayEditView * overlayEditController = [[[AnonymousOverlayEditView alloc]initWithNibName:@"AnonymousOverlayEditView" bundle:nil]autorelease];
+	overlayEditController.overlay = item.overlay;
+	[self presentModalViewController:overlayEditController animated:YES];
 }
 
 - (void)selectOverlayItem:(AnonymousOverlayItem *)selectedItem{

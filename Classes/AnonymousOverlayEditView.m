@@ -7,9 +7,12 @@
 //
 
 #import "AnonymousOverlayEditView.h"
+#import "AnonymousOverlaySelectionView.h"
 
 
 @implementation AnonymousOverlayEditView
+
+@synthesize overlay;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -22,20 +25,65 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	NSAssert(overlay != nil, @"No Overlay Set");
+	// Draw the overlay at the correct offset/position
+	faceRect = CGRectMake(150, 140, 120, 120);
+	CGRect rect = [overlay overlayRectFromFaceRect:faceRect];
+	imageView = [[UIImageView alloc]init];
+	imageView.contentMode = UIViewContentModeScaleAspectFill;
+	imageView.image = overlay.image;
+	imageView.frame = rect;
+	[self.view addSubview:imageView];
+	
+	// Save Overlay's initial state
+	[overlay save];
+	
+	// Add gesture recognizer
+	UIPinchGestureRecognizer * pinchRecognizer = [[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)]autorelease];
+	[eventView addGestureRecognizer:pinchRecognizer];
+	
+	UIPanGestureRecognizer * panRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)]autorelease];
+	[eventView addGestureRecognizer:panRecognizer];	
 }
-*/
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)recognizer{
+	if (recognizer.state == UIGestureRecognizerStateBegan){
+		overlay.startingSizeRatio = overlay.sizeRatio;
+	}else if (recognizer.state == UIGestureRecognizerStateChanged) {
+		overlay.sizeRatio = overlay.startingSizeRatio*recognizer.scale;
+		imageView.frame = [overlay overlayRectFromFaceRect:faceRect];		
+	}
 }
-*/
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer{
+	if (recognizer.state == UIGestureRecognizerStateBegan){
+		overlay.startingOffsetToFace = overlay.offsetToFace;
+	}else if (recognizer.state == UIGestureRecognizerStateChanged) {
+		CGPoint offset = [recognizer translationInView:eventView];
+		offset = CGPointMake(offset.x/overlay.sizeRatio, offset.y/overlay.sizeRatio);
+		overlay.offsetToFace = CGPointMake(overlay.startingOffsetToFace.x + offset.x,
+										   overlay.startingOffsetToFace.y + offset.y);
+		imageView.frame = [overlay overlayRectFromFaceRect:faceRect];			
+	}
+}
+
+- (IBAction)cancelAndReturn{
+	[overlay reset];
+	[((AnonymousOverlaySelectionView *)(self.parentViewController)) toggleEdit];	
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)saveAndReturn{
+	[overlay save];
+	[((AnonymousOverlaySelectionView *)(self.parentViewController)) toggleEdit];	
+	[self.parentViewController dismissModalViewControllerAnimated:YES];	
+}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

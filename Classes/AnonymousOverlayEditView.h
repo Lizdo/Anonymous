@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AnonymousOverlayView.h"
 
 @interface AnonymousOverlayEditView : UIViewController {
+	AnonymousOverlay * overlay;
+	CGRect faceRect;
+	
+	IBOutlet UIView * eventView;
+	UIImageView * imageView;
 	
 }
+
+
+@property (nonatomic, assign) AnonymousOverlay * overlay;
+
+- (IBAction)cancelAndReturn;
+- (IBAction)saveAndReturn;
 
 @end

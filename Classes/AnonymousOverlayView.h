@@ -17,6 +17,12 @@
 	CGPoint offsetToFace;
 	float sizeRatio;
 	BOOL isSelected;
+	
+	CGPoint startingOffsetToFace;
+	float startingSizeRatio;	
+	
+	CGPoint originalOffsetToFace;
+	float originalSizeRatio;
 }
 
 @property (nonatomic,retain) UIImage * image;
@@ -24,9 +30,16 @@
 @property (nonatomic) float sizeRatio;
 @property (nonatomic) BOOL isSelected;
 
+@property (nonatomic) CGPoint startingOffsetToFace;
+@property (nonatomic) float startingSizeRatio;
+
 
 + (id)AnonymousOverlayWithImage:(UIImage *)image;
 - (CGRect)overlayRectFromFaceRect:(CGRect)faceRect;
+
+#pragma mark Edit Functions
+- (void)save;
+- (void)reset;
 
 @end
 

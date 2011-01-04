@@ -40,6 +40,7 @@ CGRect enlargeRect(CGRect r){
 @implementation AnonymousOverlay
 
 @synthesize image, offsetToFace, sizeRatio, isSelected;
+@synthesize startingSizeRatio, startingOffsetToFace;
 
 + (id)AnonymousOverlayWithImage:(UIImage *)image{
 	AnonymousOverlay * overlay = [[AnonymousOverlay alloc] init];
@@ -51,11 +52,13 @@ CGRect enlargeRect(CGRect r){
 }
 
 - (CGRect)overlayRectFromFaceRect:(CGRect)faceRect{
-	CGPoint faceOrigin = faceRect.origin;
-	CGPoint origin = CGPointMake(faceOrigin.x + offsetToFace.x*sizeRatio,
-								 faceOrigin.y + offsetToFace.y*sizeRatio);
+	CGPoint faceCenter = CGPointMake(CGRectGetMidX(faceRect),
+									 CGRectGetMidY(faceRect));
+	CGPoint center = CGPointMake(faceCenter.x + offsetToFace.x,
+								 faceCenter.y + offsetToFace.y);
 	float size = faceRect.size.width*sizeRatio;
-	return CGRectMake(origin.x, origin.y, size, size);
+	return CGRectMake(center.x - size/2.0f, center.y - size/2.0f,
+					  size, size);
 }
 
 #pragma mark NSCoding
@@ -80,6 +83,16 @@ CGRect enlargeRect(CGRect r){
     return (self);
 }
 
+#pragma mark Edit Functions
+- (void)save{
+	originalSizeRatio = sizeRatio;
+	originalOffsetToFace = offsetToFace;
+}
+
+- (void)reset{
+	sizeRatio = originalSizeRatio;
+	offsetToFace = originalOffsetToFace;
+}
 
 @end
 

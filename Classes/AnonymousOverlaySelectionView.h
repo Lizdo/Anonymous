@@ -47,6 +47,7 @@ typedef enum {
 @property (nonatomic) OverlayItemState state;
 @property (nonatomic) BOOL isSelected;
 
+- (AnonymousOverlay *)overlay;
 + (id)anonymousOverlayItemWithOverlay:(AnonymousOverlay *)anOverlay;
 
 @end

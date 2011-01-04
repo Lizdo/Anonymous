@@ -25,6 +25,7 @@
 		54FC5BDE0E3EB3EB00F48645 /* laughing_man.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */; };
 		6E095E9312D219020060C33A /* AnonymousOverlayEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */; };
 		6E095E9412D219020060C33A /* AnonymousOverlayEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */; };
+		6E095EFD12D36A580060C33A /* EditBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E095EFC12D36A580060C33A /* EditBackground.png */; };
 		6E11C80412BDE84F00D71A6F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11C80312BDE84F00D71A6F /* CoreMedia.framework */; };
 		6E11C80612BDE84F00D71A6F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11C80512BDE84F00D71A6F /* CoreVideo.framework */; };
 		6E11C80812BDE85C00D71A6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11C80712BDE85C00D71A6F /* AVFoundation.framework */; };
@@ -81,6 +82,7 @@
 		6E095E9012D219020060C33A /* AnonymousOverlayEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlayEditView.h; sourceTree = "<group>"; };
 		6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlayEditView.m; sourceTree = "<group>"; };
 		6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AnonymousOverlayEditView.xib; path = Classes/AnonymousOverlayEditView.xib; sourceTree = "<group>"; };
+		6E095EFC12D36A580060C33A /* EditBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EditBackground.png; sourceTree = "<group>"; };
 		6E11C80312BDE84F00D71A6F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		6E11C80512BDE84F00D71A6F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		6E11C80712BDE85C00D71A6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -235,6 +237,7 @@
 		6E58950112C37D2D0030818A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E095EFC12D36A580060C33A /* EditBackground.png */,
 				6E6DEE3A12CB837A00322BEB /* ConfigButton.png */,
 				6E6DEE3B12CB837A00322BEB /* ConfigButton@2x.png */,
 				6E6DEE3C12CB837A00322BEB /* EditButton.png */,
@@ -338,6 +341,7 @@
 				6E49E68712CCD7CB00A577C6 /* EditMark@2x.png in Resources */,
 				6E49E68812CCD7CB00A577C6 /* EditMark.png in Resources */,
 				6E095E9412D219020060C33A /* AnonymousOverlayEditView.xib in Resources */,
+				6E095EFD12D36A580060C33A /* EditBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
