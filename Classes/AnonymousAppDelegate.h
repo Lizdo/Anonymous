@@ -17,5 +17,6 @@
 
 - (AnonymousOverlay *)selectedOverlay;
 - (void)save;
+- (NSString *)overlayFilePath;
 
 @end

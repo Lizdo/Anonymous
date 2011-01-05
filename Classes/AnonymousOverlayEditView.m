@@ -32,7 +32,7 @@
 	
 	NSAssert(overlay != nil, @"No Overlay Set");
 	// Draw the overlay at the correct offset/position
-	faceRect = CGRectMake(150, 140, 120, 120);
+	faceRect = CGRectMake(100, 110, 120, 120);
 	CGRect rect = [overlay overlayRectFromFaceRect:faceRect];
 	imageView = [[UIImageView alloc]init];
 	imageView.contentMode = UIViewContentModeScaleAspectFill;

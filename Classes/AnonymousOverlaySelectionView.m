@@ -198,7 +198,7 @@
 }
 
 - (void)editOverlayItem:(AnonymousOverlayItem *)item{
-	self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	//self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	AnonymousOverlayEditView * overlayEditController = [[[AnonymousOverlayEditView alloc]initWithNibName:@"AnonymousOverlayEditView" bundle:nil]autorelease];
 	overlayEditController.overlay = item.overlay;
 	[self presentModalViewController:overlayEditController animated:YES];

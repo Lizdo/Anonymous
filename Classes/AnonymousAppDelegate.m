@@ -20,7 +20,7 @@
 	[window makeKeyAndVisible];
 	
 	// TODO: load the array from the disk on background thread
-	overlays = [NSKeyedUnarchiver unarchiveObjectWithFile:kOverlayFilePath];
+	overlays = [NSKeyedUnarchiver unarchiveObjectWithFile:[self overlayFilePath]];
 	if (overlays == nil) {
 		// No valid object extracted, create a temp one
 		overlays = [NSMutableArray arrayWithObject:[AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]]];
@@ -29,6 +29,12 @@
 	}
 	
 	[overlays retain];
+}
+
+- (NSString *)overlayFilePath{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:kOverlayFilePath];
 }
 
 
@@ -52,7 +58,7 @@
 
 
 - (void)save{
-	BOOL result = [NSKeyedArchiver archiveRootObject:overlays toFile:kOverlayFilePath];
+	BOOL result = [NSKeyedArchiver archiveRootObject:overlays toFile:[self overlayFilePath]];
 	if (result == NO) {
 		NSLog(@"Failed to save file");
 	}

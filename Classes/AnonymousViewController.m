@@ -453,6 +453,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (IBAction)showConfig{
 	[self pauseCapture];
 	AnonymousOverlaySelectionView * overlaySelectionController = [[[AnonymousOverlaySelectionView alloc]initWithNibName:@"AnonymousOverlaySelectionView" bundle:nil]autorelease];
+	overlaySelectionController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;	
 	[self presentModalViewController:overlaySelectionController animated:YES];
 }
 

@@ -8,14 +8,7 @@
 
 #import "AnonymousOverlayView.h"
 
-#define EnlargeScale 1.5
-
-CGRect enlargeRect(CGRect r){
-	CGPoint midPoint = CGPointMake(r.origin.x+r.size.width/2, r.origin.y+r.size.height/2);
-	return CGRectMake(midPoint.x-r.size.width*EnlargeScale/2, midPoint.y-r.size.height*EnlargeScale/2, 
-					   r.size.width*EnlargeScale, r.size.height*EnlargeScale);
-}
-
+#define DefaultEnlargeScale 1.5
 
 #pragma mark NSCoding for UIImage
 
@@ -46,7 +39,7 @@ CGRect enlargeRect(CGRect r){
 	AnonymousOverlay * overlay = [[AnonymousOverlay alloc] init];
 	overlay.image = image;
 	overlay.offsetToFace = CGPointZero;
-	overlay.sizeRatio = EnlargeScale;
+	overlay.sizeRatio = DefaultEnlargeScale;
 	overlay.isSelected = NO;	
 	return [overlay autorelease];
 }
