@@ -8,9 +8,13 @@
 #import "UIView+SaveToImage.h"
 #import "AnonymousOverlaySelectionView.h"
 
+
+// Import ShareKit
+#import "SHK.h"
+
 @class AnonymousOverlayView;
 
-@interface AnonymousViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate> {
+@interface AnonymousViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, SHKRootViewController> {
 	AVCaptureSession *session;
 	
 	IBOutlet UIView *previewView;

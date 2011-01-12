@@ -1,6 +1,7 @@
 #import "AnonymousViewController.h"
 #import "AnonymousOverlayView.h"
 
+
 @implementation AnonymousViewController
 @synthesize previewView, overlayView, start, previewImage;
 
@@ -261,6 +262,9 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 	NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Grab" ofType:@"aif"] isDirectory:NO];
 	AudioServicesCreateSystemSoundID((CFURLRef)url, &alertSoundID);
 
+	// TODO: Check if there are images to share in the queue
+	[SHK flushOfflineQueue];
+	
 	[self prepareToDetectFace];
 
 	[self performSelector:@selector(startCapture) withObject:nil afterDelay:0.1];
@@ -429,7 +433,23 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
-	UIImageWriteToSavedPhotosAlbum(result, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+	//UIImageWriteToSavedPhotosAlbum(result, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+	// Popup ShareKit instead
+	SHKItem *item = [SHKItem image:result title:@"Look at this picture!"];
+	
+	// Get the ShareKit action sheet
+	SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+	
+	// Display the action sheet
+	[actionSheet showInView:self.view];
+	
+	// Need to resume capture when SHKShareMenu is removed from the view
+
+}
+
+- (void)SHKViewWasDismissed{
+	NSLog(@"ShareKit dismissed!");
+	[self resumeCapture];	
 }
 
 - (void)               image: (UIImage *) image
