@@ -6,7 +6,7 @@
 
 #define FrameBufferWidth 360
 #define FrameBufferHeight 480
-#define DetectScale 4
+#define DetectScale 2
 #define LogTime 0
 #define TimeToPredict 6
 
@@ -30,23 +30,15 @@ IplImage* transposeImage(IplImage* image) {
 	return rotated;
 }
 
-#define PredictScale 3.0f
-
-CvRect enlargeCvRect(CvRect r){
-	CGPoint midPoint = CGPointMake(r.x+r.width/2, r.y+r.height/2);
-	return cvRect(midPoint.x-r.width*PredictScale/2, midPoint.y-r.height*PredictScale/2, 
-					  r.width*PredictScale, r.height*PredictScale);
-}
-
 CGRect predictedRect(CGRect rect2, CGRect rect1){
 	if (CGRectEqualToRect(rect2, CGRectZero) || CGRectEqualToRect(rect1, CGRectZero)) {
 		return CGRectZero;
 	}
-	float width = rect2.size.width + (rect1.size.width - rect2.size.width) * 2;
-	float height = rect2.size.height + (rect1.size.height - rect2.size.height) * 2;
+	float width = rect2.size.width + (rect1.size.width - rect2.size.width) * 1.5;// Linear should be 2
+	float height = rect2.size.height + (rect1.size.height - rect2.size.height) * 1.5;
 	
-	float x = rect2.origin.x + (rect1.origin.x - rect2.origin.x) * 2;
-	float y = rect2.origin.y + (rect1.origin.y - rect2.origin.y) * 2;	
+	float x = rect2.origin.x + (rect1.origin.x - rect2.origin.x) * 1.5;
+	float y = rect2.origin.y + (rect1.origin.y - rect2.origin.y) * 1.5;	
 	
 	return CGRectMake(x, y, width, height);
 }
@@ -190,7 +182,7 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 		}
 
 		// Detect Face
-		CvSeq* faces = cvHaarDetectObjects(temp_image, cascade, storage, 1.5f, 2, CV_HAAR_FIND_BIGGEST_OBJECT|CV_HAAR_DO_ROUGH_SEARCH, cvSize(20, 20));
+		CvSeq* faces = cvHaarDetectObjects(temp_image, cascade, storage, 1.3f, 2, CV_HAAR_FIND_BIGGEST_OBJECT|CV_HAAR_DO_ROUGH_SEARCH, cvSize(20, 20));
 		
 		if (LogTime) {
 			NSLog(@"Detect Face: %f", -[start timeIntervalSinceNow]);
@@ -201,16 +193,22 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 		// Draw results on the iamge
 		for(int i = 0; i < 10; i++) {
 			if (i >= faces->total) {
+				// Fill the rest with Zero
 				if (!CGRectEqualToRect([[overlayView.rects objectAtIndex:i] CGRectValue], CGRectZero)) {
 					[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectZero]];
 				}
 			}else{
+				// Fill the found faces in array, and cache them
 				CvRect cvrect = *(CvRect*)cvGetSeqElem(faces, i);
 				CGRect r = CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale);
 				[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:r]];
 				//Cache the previous face for prediction
-				if (i = 0) {
-					previousFace2 = previousFace1;
+				if (i == 0) {
+					if (CGRectEqualToRect(previousFace1, CGRectZero)){
+						previousFace2 = previousFace1 = r;					
+					}else {
+						previousFace2 = previousFace1;
+					}
 					previousFace1 = r;
 				}
 
@@ -223,11 +221,15 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 			notFoundCount++;
 			if (notFoundCount >= TimeToPredict) {
 				//More than 0.5s not found, remove the face
+				//NSLog(@"No Face Found, Predict timeout");				
 				notFoundCount = 0;
 				previousFace1 = previousFace2 = CGRectZero;
 			}else {
 				CGRect r = predictedRect(previousFace2, previousFace1);
-				[overlayView.rects replaceObjectAtIndex:1 withObject:[NSValue valueWithCGRect:r]];
+				//NSLog(@"No Face Found, Predict %f, %f", r.size.width, r.size.height);				
+				previousFace2 = previousFace1;
+				previousFace1 = r;
+				[overlayView.rects replaceObjectAtIndex:0 withObject:[NSValue valueWithCGRect:r]];
 			}
 		}
 		

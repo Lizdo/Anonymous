@@ -28,5 +28,7 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<string>video-camera</string>
 </dict>
 </plist>

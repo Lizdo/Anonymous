@@ -171,6 +171,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6EF6071312DDF5BC00CF7D57 /* Sound */,
 				6E58950112C37D2D0030818A /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -194,9 +195,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6E5894C512C365550030818A /* Grab.aif */,
 				6E58911E12BF9F120030818A /* haarcascade_frontalface_alt.xml */,
-				54BBAF3C0F04148D00568ED9 /* Tink.aiff */,
 				54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */,
 				540ABCF50E3E280700E30885 /* Icon.png */,
 				5452E0090E3D08AA00FE4518 /* lena.jpg */,
@@ -260,6 +259,15 @@
 				6E49E68212CCD7CB00A577C6 /* EditMark.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		6EF6071312DDF5BC00CF7D57 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				6E5894C512C365550030818A /* Grab.aif */,
+				54BBAF3C0F04148D00568ED9 /* Tink.aiff */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
