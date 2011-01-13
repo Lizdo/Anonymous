@@ -99,7 +99,12 @@
 		shareMenu.item = item;
 		[[SHK currentHelper] showViewController:shareMenu];
 		[shareMenu release];
+	}else {
+		//LIZ: Cancel buttom
+		// Remove the SHK view wrapper from the window
+		[[SHK currentHelper] viewWasDismissed];	
 	}
+
 	
 	[super dismissWithClickedButtonIndex:buttonIndex animated:animated];
 }

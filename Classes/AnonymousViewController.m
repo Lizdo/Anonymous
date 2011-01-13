@@ -434,6 +434,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	UIGraphicsEndImageContext();
 	
 	//UIImageWriteToSavedPhotosAlbum(result, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+	
+	[[SHK currentHelper] setRootViewController:self];	
+	
 	// Popup ShareKit instead
 	SHKItem *item = [SHKItem image:result title:@"Look at this picture!"];
 	
