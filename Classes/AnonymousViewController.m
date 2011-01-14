@@ -447,8 +447,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	[actionSheet showInView:self.view];
 	
 	// Need to resume capture when SHKShareMenu is removed from the view
-
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(SHKViewWasDismissed)
+												 name:@"SHKSendDidFinish" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(SHKViewWasDismissed)
+												 name:@"SHKSendDidCancel" object:nil];
 }
+
 
 - (void)SHKViewWasDismissed{
 	NSLog(@"ShareKit dismissed!");

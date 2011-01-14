@@ -40,17 +40,10 @@
 @class SHKActionSheet;
 @class SHKViewControllerWrapper;
 
-@protocol SHKRootViewController
-
-- (void)SHKViewWasDismissed;
-
-@end
-
-
 
 @interface SHK : NSObject 
 {
-	UIViewController <SHKRootViewController> *rootViewController;
+	UIViewController *rootViewController;
 	UIViewController *currentView;
 	UIViewController *pendingView;
 	BOOL isDismissingView;

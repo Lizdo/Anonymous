@@ -693,11 +693,6 @@
 		[shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"SHKSendDidFinish" object:self];
-	
-	// LIZ
-	// Remove the SHK view wrapper from the window
-	[[SHK currentHelper] viewWasDismissed];
-	
 }
 
 - (void)sendDidFailShouldRelogin
@@ -726,10 +721,6 @@
 		[shareDelegate performSelector:@selector(sharerCancelledSending:) withObject:self];	
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"SHKSendDidCancel" object:self];
-	
-	// LIZ
-	// Remove the SHK view wrapper from the window
-	[[SHK currentHelper] viewWasDismissed];	
 }
 
 

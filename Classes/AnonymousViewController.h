@@ -14,7 +14,7 @@
 
 @class AnonymousOverlayView;
 
-@interface AnonymousViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, SHKRootViewController> {
+@interface AnonymousViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate> {
 	AVCaptureSession *session;
 	
 	IBOutlet UIView *previewView;

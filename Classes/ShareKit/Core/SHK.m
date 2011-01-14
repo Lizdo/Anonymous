@@ -210,9 +210,6 @@ BOOL SHKinit;
 		// See: http://github.com/ideashower/ShareKit/issues#issue/24
 		[self performSelector:@selector(showPendingView) withObject:nil afterDelay:0.02];
 		return;
-	}else {
-		// LIZ: really dismissed
-		[rootViewController SHKViewWasDismissed];
 	}
 
 }

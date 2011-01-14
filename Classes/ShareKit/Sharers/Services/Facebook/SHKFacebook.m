@@ -109,6 +109,8 @@
 {
 	self.pendingFacebookAction = SHKFacebookPendingLogin;
 	self.login = [[[FBLoginDialog alloc] initWithSession:[self session]] autorelease];
+	// LIZ: Need to set delegate to get event
+	login.delegate = self;
 	[login show];
 }
 
@@ -213,7 +215,8 @@
 
 - (void)dialogDidCancel:(FBDialog*)dialog
 {
-	if (pendingFacebookAction == SHKFacebookPendingStatus)
+	// LIZ: Cancel here anyway
+	//if (pendingFacebookAction == SHKFacebookPendingStatus)
 		[self sendDidCancel];
 }
 

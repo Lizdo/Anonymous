@@ -100,9 +100,9 @@
 		[[SHK currentHelper] showViewController:shareMenu];
 		[shareMenu release];
 	}else {
-		//LIZ: Cancel buttom
-		// Remove the SHK view wrapper from the window
-		[[SHK currentHelper] viewWasDismissed];	
+		//LIZ: Post Notification...
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"SHKSendDidCancel" object:self];
+
 	}
 
 	
