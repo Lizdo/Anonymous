@@ -183,7 +183,7 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 		}
 
 		// Detect Face
-		CvSeq* faces = cvHaarDetectObjects(temp_image, cascade, storage, 1.3f, 2, CV_HAAR_FIND_BIGGEST_OBJECT|CV_HAAR_DO_ROUGH_SEARCH, cvSize(20, 20));
+		CvSeq* faces = cvHaarDetectObjects(temp_image, cascade, storage, 1.3f, 2, CV_HAAR_DO_CANNY_PRUNING, cvSize(20, 20), cvSize(300, 300));
 		
 		if (LogTime) {
 			NSLog(@"Detect Face: %f", -[start timeIntervalSinceNow]);
@@ -215,6 +215,8 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 
 			}
 		}
+		
+		NSLog(@"total faces: %d", faces->total);
 		
 		
 		// If no face found, do a simple prediction

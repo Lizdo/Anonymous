@@ -9,7 +9,7 @@
 #import "AnonymousOverlaySelectionView.h"
 
 
-// Import ShareKit
+// Import ShareKit1
 #import "SHK.h"
 
 @class AnonymousOverlayView;
