@@ -25,6 +25,7 @@
 #define SlideAnimDuration 0.3f
 
 @class AnonymousOverlaySelectionView;
+@class AnonymousOverlayAddView;
 
 typedef enum {
 	OverlayItemStateNormal,
@@ -77,5 +78,6 @@ typedef enum {
 
 - (IBAction)dismiss;
 - (IBAction)toggleEdit;
+- (IBAction)addNewOverlayItem;
 
 @end

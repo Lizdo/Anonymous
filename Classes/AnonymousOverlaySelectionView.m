@@ -9,6 +9,7 @@
 #import "AnonymousOverlaySelectionView.h"
 #import "AnonymousViewController.h"
 #import "AnonymousOverlayEditView.h"
+#import "AnonymousOverlayAddView.h"
 
 #import "AnonymousAppDelegate.h"
 
@@ -138,6 +139,10 @@
 	}
 	
     [super viewDidLoad];
+	
+	
+	// Hack to test search interface
+	[self performSelector:@selector(addNewOverlayItem) withObject:self afterDelay:1];
 }
 
 
@@ -195,6 +200,11 @@
 	[(AnonymousViewController *)(self.parentViewController) resumeCapture];
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 
+}
+
+- (void)addNewOverlayItem{
+	AnonymousOverlayAddView * overlayAddController = [[AnonymousOverlayAddView alloc]initWithDefaultNib];
+	[self presentModalViewController:overlayAddController animated:YES];
 }
 
 - (void)editOverlayItem:(AnonymousOverlayItem *)item{

@@ -54,11 +54,13 @@
 		6E6DEE4512CB837A00322BEB /* ResumeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3F12CB837A00322BEB /* ResumeButton@2x.png */; };
 		6E73758E12C85293002D9CED /* AnonymousOverlaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */; };
 		6E73758F12C85293002D9CED /* AnonymousOverlaySelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */; };
+		6EBD8EB712F73B5400C26516 /* AnonymousOverlayAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD8EB612F73B5400C26516 /* AnonymousOverlayAddView.m */; };
+		6EBD8EBE12F73B6F00C26516 /* GoogleImageSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */; };
+		6EBD8F3412F7444800C26516 /* GoogleImageSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */; };
 		6ECDDE6312F3A95600687C7F /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE6112F3A95600687C7F /* libopencv_core.a */; };
 		6ECDDE6412F3A95600687C7F /* libopencv_objdetect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */; };
 		6ECDDE7F12F3A99700687C7F /* libopencv_legacy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */; };
 		6ECDDE8312F3A9A000687C7F /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */; };
-		6ECDDE8D12F3AAA000687C7F /* libopencv_features2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE8C12F3AAA000687C7F /* libopencv_features2d.a */; };
 		6EF607EF12DDFB2000CF7D57 /* SHKCustomFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075712DDFB1F00CF7D57 /* SHKCustomFormController.m */; };
 		6EF607F012DDFB2000CF7D57 /* SHKCustomFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075912DDFB1F00CF7D57 /* SHKCustomFormFieldCell.m */; };
 		6EF607F112DDFB2000CF7D57 /* SHKCustomShareMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075C12DDFB1F00CF7D57 /* SHKCustomShareMenu.m */; };
@@ -182,11 +184,15 @@
 		6E73758B12C85293002D9CED /* AnonymousOverlaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlaySelectionView.h; sourceTree = "<group>"; };
 		6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlaySelectionView.m; sourceTree = "<group>"; };
 		6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AnonymousOverlaySelectionView.xib; path = Classes/AnonymousOverlaySelectionView.xib; sourceTree = "<group>"; };
+		6EBD8EB512F73B5400C26516 /* AnonymousOverlayAddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlayAddView.h; sourceTree = "<group>"; };
+		6EBD8EB612F73B5400C26516 /* AnonymousOverlayAddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlayAddView.m; sourceTree = "<group>"; };
+		6EBD8EBC12F73B6F00C26516 /* GoogleImageSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleImageSearchView.h; sourceTree = "<group>"; };
+		6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleImageSearchView.m; sourceTree = "<group>"; };
+		6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleImageSearchView.xib; sourceTree = "<group>"; };
 		6ECDDE6112F3A95600687C7F /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_core.a; path = opencv_device/lib/libopencv_core.a; sourceTree = "<group>"; };
 		6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_objdetect.a; path = opencv_device/lib/libopencv_objdetect.a; sourceTree = "<group>"; };
 		6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_legacy.a; path = opencv_device/lib/libopencv_legacy.a; sourceTree = "<group>"; };
 		6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_imgproc.a; path = opencv_device/lib/libopencv_imgproc.a; sourceTree = "<group>"; };
-		6ECDDE8C12F3AAA000687C7F /* libopencv_features2d.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_features2d.a; path = opencv_device/lib/libopencv_features2d.a; sourceTree = "<group>"; };
 		6EF6075312DDFB1F00CF7D57 /* SHKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKConfig.h; sourceTree = "<group>"; };
 		6EF6075612DDFB1F00CF7D57 /* SHKCustomFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKCustomFormController.h; sourceTree = "<group>"; };
 		6EF6075712DDFB1F00CF7D57 /* SHKCustomFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHKCustomFormController.m; sourceTree = "<group>"; };
@@ -340,7 +346,6 @@
 				6ECDDE6412F3A95600687C7F /* libopencv_objdetect.a in Frameworks */,
 				6ECDDE7F12F3A99700687C7F /* libopencv_legacy.a in Frameworks */,
 				6ECDDE8312F3A9A000687C7F /* libopencv_imgproc.a in Frameworks */,
-				6ECDDE8D12F3AAA000687C7F /* libopencv_features2d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +355,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */,
+				6EBD8EBC12F73B6F00C26516 /* GoogleImageSearchView.h */,
+				6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */,
 				6EF6075212DDFB1F00CF7D57 /* ShareKit */,
 				6E58946E12C325F20030818A /* UIView+SaveToImage.h */,
 				6E58946F12C325F20030818A /* UIView+SaveToImage.m */,
@@ -363,6 +371,8 @@
 				6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */,
 				6E095E9012D219020060C33A /* AnonymousOverlayEditView.h */,
 				6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */,
+				6EBD8EB512F73B5400C26516 /* AnonymousOverlayAddView.h */,
+				6EBD8EB612F73B5400C26516 /* AnonymousOverlayAddView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -437,7 +447,6 @@
 		540723F00E3DD28C00B598A2 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				6ECDDE8C12F3AAA000687C7F /* libopencv_features2d.a */,
 				6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */,
 				6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */,
 				6ECDDE6112F3A95600687C7F /* libopencv_core.a */,
@@ -938,6 +947,7 @@
 				6E095EFD12D36A580060C33A /* EditBackground.png in Resources */,
 				6EF607F312DDFB2000CF7D57 /* SHKSharers.plist in Resources */,
 				6EF6081012DDFB2000CF7D57 /* FBConnect.bundle in Resources */,
+				6EBD8F3412F7444800C26516 /* GoogleImageSearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,6 +1025,8 @@
 				6EF6082A12DDFB2000CF7D57 /* SHKOAuthView.m in Sources */,
 				6EF6082B12DDFB2000CF7D57 /* SHKViewControllerWrapper.m in Sources */,
 				6EF6082C12DDFB2000CF7D57 /* Reachability.m in Sources */,
+				6EBD8EB712F73B5400C26516 /* AnonymousOverlayAddView.m in Sources */,
+				6EBD8EBE12F73B6F00C26516 /* GoogleImageSearchView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
