@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GoogleImageThumbnailLoader.h"
+
 //TODO: define the parameters as enum
 
 typedef enum _GoogleImageSearchState{
@@ -17,7 +19,7 @@ typedef enum _GoogleImageSearchState{
 	GIS_SEARCH_FAILED,
 }GIS_State;
 
-@interface GoogleImageSearchView : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>{
+@interface GoogleImageSearchView : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, GoogleImageThumbnailLoaderDelegate>{
 	IBOutlet UISearchBar * searchBar;
 	IBOutlet UITableView * tableView;
 	
@@ -26,6 +28,8 @@ typedef enum _GoogleImageSearchState{
 	GIS_State state;
 	
 	NSArray * imageURLs;
+    
+    NSMutableDictionary * thumbnailLoaders;
 }
 
 @property (retain, nonatomic) NSMutableData *imageSearchData;

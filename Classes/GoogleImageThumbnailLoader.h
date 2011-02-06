@@ -1,5 +1,5 @@
 //
-//  GoolgeImageThumbnailLoader.h
+//  GoogleImageThumbnailLoader.h
 //  Anonymous
 //
 //  Created by Liz on 11-2-6.
@@ -15,18 +15,24 @@
 @end
 
 
-@interface GoolgeImageThumbnailLoader : NSObject {
+@interface GoogleImageThumbnailLoader : NSObject {
 	NSString * url;
-	UIImage * image;
+    
+    //Retained by self
 	NSURLConnection * connection;
+    
 	NSIndexPath * indexPath;
-	
 	NSMutableData * data;
 	
 	id delegate;
 }
 
-- (void)downloadForIndexPath:(NSIndexPath *)theIndexPath fromURL:(NSString *)theURL withConnection:(NSURLConnection *)theConnection;
+@property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSURLConnection * connection;
+@property (nonatomic, retain) NSIndexPath * indexPath;
+@property (nonatomic, retain) NSMutableData * data;
+
+- (GoogleImageThumbnailLoader *)initForIndexPath:(NSIndexPath *)theIndexPath fromURL:(NSString *)theURL;
 - (void)cancelDownload;
 - (void)downloadComplete;
 

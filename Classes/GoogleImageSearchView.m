@@ -10,6 +10,12 @@
 #import "NSDictionary_JSONExtensions.h"
 #import "CJSONDeserializer.h"
 
+@interface GoogleImageSearchView(Private)
+- (void)startNewSearch;
+- (void)loadThumbnails;
+@end
+
+
 @implementation GoogleImageSearchView
 
 @synthesize imageSearchData;
@@ -74,8 +80,28 @@
 	// Next, create an NSURLConnection object, using the NSURLRequest:, retained by class
 				  
 	self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
-
 }
+
+- (void)loadThumbnails{
+    thumbnailLoaders = [NSMutableDictionary dictionaryWithCapacity:[imageURLs count]];
+    for (int i = 0; i<[imageURLs count]; i++) {
+        
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        GoogleImageThumbnailLoader * loader = [[GoogleImageThumbnailLoader alloc] initForIndexPath:indexPath fromURL:[imageURLs objectAtIndex:i]];
+        
+        [thumbnailLoaders setObject:loader forKey:indexPath];
+    }
+}
+
+
+- (void)downloadCompleteForIndexPath:(NSIndexPath *)theIndexPath{
+    GoogleImageThumbnailLoader * loader = [thumbnailLoaders objectForKey:theIndexPath];
+    NSAssert(loader != nil, @"loader is nil");
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:theIndexPath];
+    cell.imageView.image = [UIImage imageWithData:loader.data];
+}
+
 
 #pragma mark -
 #pragma mark NSURLConnection Delegate
@@ -108,6 +134,7 @@
 			[urls addObject:[obj objectForKey:@"tbUrl"]];
 		}
 		self.imageURLs = urls;
+        [self loadThumbnails];
 	}else {
 		NSLog(@"Parse Failure");
 		state = GIS_SEARCH_FAILED;
@@ -122,14 +149,14 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
     if ([error code] == kCFURLErrorNotConnectedToInternet) {
         // if we can identify the error, we can present a more precise message to the user.
-        NSDictionary *userInfo =
-        [NSDictionary dictionaryWithObject:
-         NSLocalizedString(@"No Connection Error",
-                           @"Error message displayed when not connected to the Internet.")
-                                    forKey:NSLocalizedDescriptionKey];
-        NSError *noConnectionError = [NSError errorWithDomain:NSCocoaErrorDomain
-                                                         code:kCFURLErrorNotConnectedToInternet
-                                                     userInfo:userInfo];		
+//        NSDictionary *userInfo =
+//        [NSDictionary dictionaryWithObject:
+//         NSLocalizedString(@"No Connection Error",
+//                           @"Error message displayed when not connected to the Internet.")
+//                                    forKey:NSLocalizedDescriptionKey];
+//        NSError *noConnectionError = [NSError errorWithDomain:NSCocoaErrorDomain
+//                                                         code:kCFURLErrorNotConnectedToInternet
+//                                                     userInfo:userInfo];		
     } else {
         // otherwise handle the error generically
 		NSLog(@"Error: %@", [error localizedDescription]);
@@ -173,7 +200,7 @@
     
     UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
 	// Configure the cell.
