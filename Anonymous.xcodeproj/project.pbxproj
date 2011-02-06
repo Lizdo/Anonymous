@@ -37,6 +37,7 @@
 		6E349EBC12FE960700192AD3 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E349EB012FE960700192AD3 /* CJSONDeserializer.m */; };
 		6E349EBD12FE960700192AD3 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E349EB212FE960700192AD3 /* CJSONScanner.m */; };
 		6E349EBE12FE960700192AD3 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E349EB412FE960700192AD3 /* CJSONSerializer.m */; };
+		6E349F4D12FEACF300192AD3 /* GoolgeImageThumbnailLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E349F4C12FEACF300192AD3 /* GoolgeImageThumbnailLoader.m */; };
 		6E49E68312CCD7CB00A577C6 /* WrongMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E49E67D12CCD7CB00A577C6 /* WrongMark@2x.png */; };
 		6E49E68412CCD7CB00A577C6 /* WrongMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E49E67E12CCD7CB00A577C6 /* WrongMark.png */; };
 		6E49E68512CCD7CB00A577C6 /* RightMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E49E67F12CCD7CB00A577C6 /* RightMark@2x.png */; };
@@ -184,6 +185,8 @@
 		6E349EB312FE960700192AD3 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		6E349EB412FE960700192AD3 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
 		6E349EB512FE960700192AD3 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		6E349F4B12FEACF300192AD3 /* GoolgeImageThumbnailLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoolgeImageThumbnailLoader.h; sourceTree = "<group>"; };
+		6E349F4C12FEACF300192AD3 /* GoolgeImageThumbnailLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoolgeImageThumbnailLoader.m; sourceTree = "<group>"; };
 		6E49E67D12CCD7CB00A577C6 /* WrongMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WrongMark@2x.png"; sourceTree = "<group>"; };
 		6E49E67E12CCD7CB00A577C6 /* WrongMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WrongMark.png; sourceTree = "<group>"; };
 		6E49E67F12CCD7CB00A577C6 /* RightMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightMark@2x.png"; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */,
 				6EBD8EBC12F73B6F00C26516 /* GoogleImageSearchView.h */,
 				6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */,
+				6E349F4B12FEACF300192AD3 /* GoolgeImageThumbnailLoader.h */,
+				6E349F4C12FEACF300192AD3 /* GoolgeImageThumbnailLoader.m */,
 				6EF6075212DDFB1F00CF7D57 /* ShareKit */,
 				6E58946E12C325F20030818A /* UIView+SaveToImage.h */,
 				6E58946F12C325F20030818A /* UIView+SaveToImage.m */,
@@ -1116,6 +1121,7 @@
 				6E349EBC12FE960700192AD3 /* CJSONDeserializer.m in Sources */,
 				6E349EBD12FE960700192AD3 /* CJSONScanner.m in Sources */,
 				6E349EBE12FE960700192AD3 /* CJSONSerializer.m in Sources */,
+				6E349F4D12FEACF300192AD3 /* GoolgeImageThumbnailLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1126,11 +1132,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Anonymous_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*][arch=*]" = "$(SRCROOT)/opencv_device/include";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*][arch=*]" = "$(SRCROOT)/opencv_simulator/include";
 				INFOPLIST_FILE = Info.plist;
@@ -1145,6 +1153,8 @@
 					"-lz",
 				);
 				PRODUCT_NAME = Anonymous;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1152,10 +1162,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Anonymous_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*][arch=*]" = "$(SRCROOT)/opencv_device/include";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*][arch=*]" = "$(SRCROOT)/opencv_simulator/include";
 				INFOPLIST_FILE = Info.plist;
@@ -1170,6 +1182,8 @@
 					"-lz",
 				);
 				PRODUCT_NAME = Anonymous;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1182,7 +1196,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				PRODUCT_NAME = Anonymous;
@@ -1198,7 +1212,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};

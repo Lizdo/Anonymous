@@ -14,6 +14,7 @@
 
 @synthesize imageSearchData;
 @synthesize imageURLs;
+@synthesize connection;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -44,12 +45,6 @@
 
 - (void)performSearch{
 	NSLog(@"starting a new search");
-	// Start a new search in the background
-	
-	// Reset Table View Status and Add a spin UI
-	
-	// do the actual search
-	
 	// wait for call back
 	[self startNewSearch];
 }
@@ -59,6 +54,9 @@
 	// TODO: Stop on-going searches
 	if (state == GIS_SEARCH_IN_PROGRESS) {
 		//stop the current search
+		if (connection != nil) {
+			[connection cancel];
+		}
 	}
 	
 	state = GIS_SEARCH_IN_PROGRESS;
@@ -73,9 +71,9 @@
 	NSURL *url = [NSURL URLWithString:string];
 	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 				  
-	// Next, create an NSURLConnection object, using the NSURLRequest:
+	// Next, create an NSURLConnection object, using the NSURLRequest:, retained by class
 				  
-	NSURLConnection *connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
+	self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
 
 }
 
@@ -137,8 +135,7 @@
 		NSLog(@"Error: %@", [error localizedDescription]);
     }
 	state = GIS_SEARCH_FAILED;
-}
-
+} 
 
 #pragma mark -
 #pragma mark UISearchBar Delegate

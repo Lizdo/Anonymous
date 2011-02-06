@@ -334,6 +334,7 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 #endif
 	
 }
+#if (!TARGET_IPHONE_SIMULATOR)
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
@@ -353,6 +354,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	
 	[self detectFace:image];
 }
+
+#endif
 
 // Create a UIImage from sample buffer data
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer 

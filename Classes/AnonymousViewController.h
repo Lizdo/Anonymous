@@ -9,13 +9,18 @@
 #import "AnonymousOverlaySelectionView.h"
 
 
-// Import ShareKit1
+// Import ShareKit
 #import "SHK.h"
 
 @class AnonymousOverlayView;
+@class AVCaptureSession;
 
-@interface AnonymousViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate> {
+
+@interface AnonymousViewController : UIViewController{
+#if (!TARGET_IPHONE_SIMULATOR)
+
 	AVCaptureSession *session;
+#endif
 	
 	IBOutlet UIView *previewView;
 	IBOutlet AnonymousOverlayView *overlayView;	

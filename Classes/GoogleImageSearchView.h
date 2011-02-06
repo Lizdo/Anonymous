@@ -21,6 +21,7 @@ typedef enum _GoogleImageSearchState{
 	IBOutlet UISearchBar * searchBar;
 	IBOutlet UITableView * tableView;
 	
+	NSURLConnection * connection;
 	NSMutableData * imageSearchData;
 	GIS_State state;
 	
@@ -29,6 +30,7 @@ typedef enum _GoogleImageSearchState{
 
 @property (retain, nonatomic) NSMutableData *imageSearchData;
 @property (retain, nonatomic) NSArray *imageURLs;
+@property (retain, nonatomic) NSURLConnection * connection;
 
 - (id)initWithDefaultNib;
 - (IBAction)performSearch;
