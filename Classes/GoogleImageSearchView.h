@@ -10,13 +10,27 @@
 
 //TODO: define the parameters as enum
 
-@interface GoogleImageSearchView : UIViewController <UITableViewDataSource, UITableViewDelegate>{
+typedef enum _GoogleImageSearchState{
+	GIS_STANDBY,
+	GIS_SEARCH_IN_PROGRESS,
+	GIS_SEARCH_COMPLETED,
+	GIS_SEARCH_FAILED,
+}GIS_State;
+
+@interface GoogleImageSearchView : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>{
 	IBOutlet UISearchBar * searchBar;
 	IBOutlet UITableView * tableView;
+	
+	NSMutableData * imageSearchData;
+	GIS_State state;
+	
+	NSArray * imageURLs;
 }
 
-- (id)initWithDefaultNib;
+@property (retain, nonatomic) NSMutableData *imageSearchData;
+@property (retain, nonatomic) NSArray *imageURLs;
 
-- (void)performSearch;
+- (id)initWithDefaultNib;
+- (IBAction)performSearch;
 
 @end
