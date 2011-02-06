@@ -282,7 +282,10 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 
 
 - (void)startCapture{
-	
+
+//Cannot capture in simulator
+#if (!TARGET_IPHONE_SIMULATOR)
+
 	// start capturing frames
 	// Create the AVCapture Session
 	session = [[AVCaptureSession alloc] init];
@@ -327,6 +330,8 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 	
 	// Start the session
 	[session startRunning];	
+
+#endif
 	
 }
 
@@ -470,15 +475,21 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 }
 
 - (void)pauseCapture{
+//Cannot capture in simulator
+#if (!TARGET_IPHONE_SIMULATOR)	
 	NSAssert(session, @"Capture Session not available.");
 	[session stopRunning];
 	takePictureButton.enabled = NO;
+#endif
 }
 
 - (void)resumeCapture{
+//Cannot capture in simulator
+#if (!TARGET_IPHONE_SIMULATOR)	
 	NSAssert(session, @"Capture Session not available.");	
 	[session startRunning];
 	takePictureButton.enabled = YES;
+#endif
 }
 
 #pragma mark Handle Events
