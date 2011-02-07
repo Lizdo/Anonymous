@@ -492,6 +492,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	NSAssert(session, @"Capture Session not available.");	
 	[session startRunning];
 	takePictureButton.enabled = YES;
+    // Hide status bar
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];    
+    
 #endif
 }
 

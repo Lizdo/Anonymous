@@ -300,7 +300,7 @@ static CGFloat kBorderWidth = 10;
 }
 
 - (id)initWithSession:(FBSession*)session {
-  if (self = [super initWithFrame:CGRectZero]) {
+  if ((self = [super initWithFrame:CGRectZero])) {
     _delegate = nil;
     _session = [session retain];
     _loadingURL = nil;

@@ -178,10 +178,6 @@ BOOL SHKinit;
 		{
 			self.isDismissingView = YES;
 			[[currentView parentViewController] dismissModalViewControllerAnimated:animated];
-			if ([currentView parentViewController] == rootViewController) {
-				// really dismissed
-				[rootViewController SHKViewWasDismissed];
-			}
 		}
 		
 		else

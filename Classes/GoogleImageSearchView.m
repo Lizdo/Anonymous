@@ -20,7 +20,9 @@
 
 @synthesize imageSearchData;
 @synthesize imageURLs;
+@synthesize imageHeights;
 @synthesize connection;
+@synthesize thumbnailLoaders;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -43,6 +45,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	state = GIS_STANDBY;
+    // Set focus to the search bar
+    [searchBar becomeFirstResponder];
 }
 
 #pragma mark -
@@ -51,8 +55,20 @@
 
 - (void)performSearch{
 	NSLog(@"starting a new search");
+    // Reset previous search
+    self.imageURLs = nil;
+    self.imageHeights = nil;
+    UITableViewCell* firstCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    firstCell.imageView.image = nil;
+
+    
+    [tableView reloadData];
+    
 	// wait for call back
 	[self startNewSearch];
+    
+    // Close the keyboard
+    [searchBar resignFirstResponder];
 }
 
 
@@ -73,26 +89,35 @@
 	
 	// Create a url with the request
 	
-	NSString * string = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@",[searchBar text]];
+    NSString * escapedUrlString =
+    [[searchBar text] stringByAddingPercentEscapesUsingEncoding:
+     NSASCIIStringEncoding];
+    
+	NSString * string = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@&imgtype=clipart&rsz=8",escapedUrlString];
 	NSURL *url = [NSURL URLWithString:string];
-	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+	NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:url]autorelease];
 				  
 	// Next, create an NSURLConnection object, using the NSURLRequest:, retained by class
 				  
 	self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
+    
+    [tableView reloadData];
+    
 }
 
 - (void)loadThumbnails{
-    thumbnailLoaders = [NSMutableDictionary dictionaryWithCapacity:[imageURLs count]];
+    self.thumbnailLoaders = [NSMutableDictionary dictionaryWithCapacity:[imageURLs count]];
     for (int i = 0; i<[imageURLs count]; i++) {
         
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        GoogleImageThumbnailLoader * loader = [[GoogleImageThumbnailLoader alloc] initForIndexPath:indexPath fromURL:[imageURLs objectAtIndex:i]];
-        
+        GoogleImageThumbnailLoader * loader = [[[GoogleImageThumbnailLoader alloc] initForIndexPath:indexPath fromURL:[imageURLs objectAtIndex:i]]autorelease];
+        loader.delegate = self;
         [thumbnailLoaders setObject:loader forKey:indexPath];
     }
 }
 
+#pragma mark -
+#pragma mark GoogleImageThumbnailLoader Delegate
 
 - (void)downloadCompleteForIndexPath:(NSIndexPath *)theIndexPath{
     GoogleImageThumbnailLoader * loader = [thumbnailLoaders objectForKey:theIndexPath];
@@ -100,6 +125,8 @@
     
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:theIndexPath];
     cell.imageView.image = [UIImage imageWithData:loader.data];
+    
+    [tableView reloadData];
 }
 
 
@@ -130,10 +157,13 @@
 		NSDictionary * responseData = [dic objectForKey:@"responseData"];
 		NSArray * results = [responseData objectForKey:@"results"];
 		NSMutableArray * urls = [NSMutableArray arrayWithCapacity:10];
+		NSMutableArray * heights = [NSMutableArray arrayWithCapacity:10];     
 		for (NSDictionary * obj in results) {
 			[urls addObject:[obj objectForKey:@"tbUrl"]];
+			[heights addObject:[obj objectForKey:@"tbHeight"]];            
 		}
 		self.imageURLs = urls;
+        self.imageHeights = heights;
         [self loadThumbnails];
 	}else {
 		NSLog(@"Parse Failure");
@@ -208,7 +238,7 @@
 	
 	switch (state) {
 		case GIS_SEARCH_COMPLETED:
-			str = [imageURLs objectAtIndex:indexPath.row];
+			str = @"";//[imageURLs objectAtIndex:indexPath.row];
 			break;
 		case GIS_SEARCH_FAILED:
 			str = @"Seach Failed...";
@@ -270,6 +300,20 @@
 
 #pragma mark -
 #pragma mark Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    switch (state) {
+		case GIS_SEARCH_COMPLETED:
+            return [[imageHeights objectAtIndex:indexPath.row] floatValue];
+			break;
+		case GIS_SEARCH_FAILED:
+		case GIS_SEARCH_IN_PROGRESS:		
+		case GIS_STANDBY:
+		default:
+			return 42.0;
+	}
+}
+
 /*
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
  

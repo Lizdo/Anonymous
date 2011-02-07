@@ -28,13 +28,16 @@ typedef enum _GoogleImageSearchState{
 	GIS_State state;
 	
 	NSArray * imageURLs;
+    NSArray * imageHeights;
     
     NSMutableDictionary * thumbnailLoaders;
 }
 
 @property (retain, nonatomic) NSMutableData *imageSearchData;
 @property (retain, nonatomic) NSArray *imageURLs;
+@property (retain, nonatomic) NSArray *imageHeights;
 @property (retain, nonatomic) NSURLConnection * connection;
+@property (retain, nonatomic) NSMutableDictionary * thumbnailLoaders;
 
 - (id)initWithDefaultNib;
 - (IBAction)performSearch;

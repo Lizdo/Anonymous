@@ -64,7 +64,7 @@
 	[item setValue:anOverlay forKeyPath:@"overlay"];
 	
 	// Set ImageView
-	UIImageView *imageView = [[UIImageView alloc] initWithFrame:item.bounds];
+	UIImageView *imageView = [[[UIImageView alloc] initWithFrame:item.bounds]autorelease];
 	imageView.image = [anOverlay image];
 	[item addSubview:imageView];
 	[item setValue:imageView forKeyPath:@"imageView"];
@@ -73,7 +73,7 @@
 	CGRect markerRect = CGRectMake(item.bounds.size.width - OverlayItemMarkerSize,
 								   item.bounds.size.height - OverlayItemMarkerSize,
 								   OverlayItemMarkerSize,OverlayItemMarkerSize);
-	UIImageView *markerView = [[UIImageView alloc] initWithFrame:markerRect];
+	UIImageView *markerView = [[[UIImageView alloc] initWithFrame:markerRect]autorelease];
 	[item addSubview:markerView];
 	[item setValue:markerView forKeyPath:@"markerView"];
 	
@@ -108,7 +108,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
 	// TODO: Load overlays from the save file
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		//load from app delegate
 		dataSource = ((AnonymousAppDelegate *)[UIApplication sharedApplication].delegate).overlays;
 	}
@@ -140,7 +140,9 @@
 	
     [super viewDidLoad];
 	
-	
+    // Show status bar
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
 	// Hack to test search interface
 	[self performSelector:@selector(addNewOverlayItem) withObject:self afterDelay:1];
 }

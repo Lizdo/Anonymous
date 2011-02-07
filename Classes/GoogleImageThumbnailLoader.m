@@ -15,6 +15,7 @@
 @synthesize connection;
 @synthesize indexPath;
 @synthesize data;
+@synthesize delegate;
 
 - (GoogleImageThumbnailLoader *)initForIndexPath:(NSIndexPath *)theIndexPath fromURL:(NSString *)theURL{
     if ((self = [super init])) {
@@ -23,7 +24,7 @@
         self.data = [[[NSMutableData alloc]init]autorelease];
         
         // init a URLRequest
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+        NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]]autorelease];
         self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
     }
     return self;
@@ -36,8 +37,8 @@
 }
 
 - (void)downloadComplete{
-    self.connection = nil;
-    [delegate downloadCompleteForIndexPath:indexPath];
+    [self.delegate downloadCompleteForIndexPath:indexPath];
+    self.connection = nil;    
 }
 
 #pragma mark -
