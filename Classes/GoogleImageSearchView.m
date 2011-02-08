@@ -23,6 +23,7 @@
 @synthesize imageHeights;
 @synthesize connection;
 @synthesize thumbnailLoaders;
+@synthesize thumbnailImages;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -63,7 +64,6 @@
 
     
     [tableView reloadData];
-    
 	// wait for call back
 	[self startNewSearch];
     
@@ -107,6 +107,7 @@
 
 - (void)loadThumbnails{
     self.thumbnailLoaders = [NSMutableDictionary dictionaryWithCapacity:[imageURLs count]];
+    self.thumbnailImages = [NSMutableDictionary dictionaryWithCapacity:[imageURLs count]];
     for (int i = 0; i<[imageURLs count]; i++) {
         
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
@@ -124,9 +125,12 @@
     NSAssert(loader != nil, @"loader is nil");
     
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:theIndexPath];
-    cell.imageView.image = [UIImage imageWithData:loader.data];
     
-    [tableView reloadData];
+    UIImage * image = [UIImage imageWithData:loader.data];
+    [thumbnailImages setObject:image forKey:theIndexPath];
+    cell.imageView.image = image;
+    
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:NO];
 }
 
 
@@ -197,8 +201,13 @@
 #pragma mark -
 #pragma mark UISearchBar Delegate
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
 	[self performSearch];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar{
+    // Close the keyboard
+    [searchBar resignFirstResponder];
 }
 
 
@@ -239,6 +248,11 @@
 	switch (state) {
 		case GIS_SEARCH_COMPLETED:
 			str = @"";//[imageURLs objectAtIndex:indexPath.row];
+            if ([thumbnailImages objectForKey:indexPath] == nil) {
+                cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
+            }else{
+                cell.imageView.image = [thumbnailImages objectForKey:indexPath];
+            }
 			break;
 		case GIS_SEARCH_FAILED:
 			str = @"Seach Failed...";
@@ -253,7 +267,7 @@
 			break;
 	}
 	cell.textLabel.text = str;
-	
+
     return cell;
 }
 

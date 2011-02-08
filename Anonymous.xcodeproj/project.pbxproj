@@ -64,6 +64,7 @@
 		6E6DEE4512CB837A00322BEB /* ResumeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DEE3F12CB837A00322BEB /* ResumeButton@2x.png */; };
 		6E73758E12C85293002D9CED /* AnonymousOverlaySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */; };
 		6E73758F12C85293002D9CED /* AnonymousOverlaySelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */; };
+		6E972AB9130176A600D63D42 /* Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E972AB8130176A600D63D42 /* Placeholder.png */; };
 		6EBD8EB712F73B5400C26516 /* AnonymousOverlayAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD8EB612F73B5400C26516 /* AnonymousOverlayAddView.m */; };
 		6EBD8EBE12F73B6F00C26516 /* GoogleImageSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */; };
 		6EBD8F3412F7444800C26516 /* GoogleImageSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */; };
@@ -215,6 +216,7 @@
 		6E73758B12C85293002D9CED /* AnonymousOverlaySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlaySelectionView.h; sourceTree = "<group>"; };
 		6E73758C12C85293002D9CED /* AnonymousOverlaySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlaySelectionView.m; sourceTree = "<group>"; };
 		6E73758D12C85293002D9CED /* AnonymousOverlaySelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AnonymousOverlaySelectionView.xib; path = Classes/AnonymousOverlaySelectionView.xib; sourceTree = "<group>"; };
+		6E972AB8130176A600D63D42 /* Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder.png; sourceTree = "<group>"; };
 		6EBD8EB512F73B5400C26516 /* AnonymousOverlayAddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlayAddView.h; sourceTree = "<group>"; };
 		6EBD8EB612F73B5400C26516 /* AnonymousOverlayAddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlayAddView.m; sourceTree = "<group>"; };
 		6EBD8EBC12F73B6F00C26516 /* GoogleImageSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleImageSearchView.h; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 		6E58950112C37D2D0030818A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E972AB8130176A600D63D42 /* Placeholder.png */,
 				6E095EFC12D36A580060C33A /* EditBackground.png */,
 				6E6DEE3A12CB837A00322BEB /* ConfigButton.png */,
 				6E6DEE3B12CB837A00322BEB /* ConfigButton@2x.png */,
@@ -1033,6 +1036,7 @@
 				6EF607F312DDFB2000CF7D57 /* SHKSharers.plist in Resources */,
 				6EF6081012DDFB2000CF7D57 /* FBConnect.bundle in Resources */,
 				6EBD8F3412F7444800C26516 /* GoogleImageSearchView.xib in Resources */,
+				6E972AB9130176A600D63D42 /* Placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

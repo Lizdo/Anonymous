@@ -31,6 +31,7 @@ typedef enum _GoogleImageSearchState{
     NSArray * imageHeights;
     
     NSMutableDictionary * thumbnailLoaders;
+    NSMutableDictionary * thumbnailImages;
 }
 
 @property (retain, nonatomic) NSMutableData *imageSearchData;
@@ -38,6 +39,7 @@ typedef enum _GoogleImageSearchState{
 @property (retain, nonatomic) NSArray *imageHeights;
 @property (retain, nonatomic) NSURLConnection * connection;
 @property (retain, nonatomic) NSMutableDictionary * thumbnailLoaders;
+@property (retain, nonatomic) NSMutableDictionary * thumbnailImages;
 
 - (id)initWithDefaultNib;
 - (IBAction)performSearch;
