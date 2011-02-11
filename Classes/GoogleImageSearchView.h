@@ -19,6 +19,10 @@ typedef enum _GoogleImageSearchState{
 	GIS_SEARCH_FAILED,
 }GIS_State;
 
+@interface GoogleImageSearchViewCell : UITableViewCell {
+}
+@end
+
 @interface GoogleImageSearchView : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, GoogleImageThumbnailLoaderDelegate>{
 	IBOutlet UISearchBar * searchBar;
 	IBOutlet UITableView * tableView;

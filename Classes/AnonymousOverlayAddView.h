@@ -13,4 +13,7 @@
 
 }
 
+-(UIImage *)changeWhiteColorTransparent: (UIImage *)image;
+
+
 @end

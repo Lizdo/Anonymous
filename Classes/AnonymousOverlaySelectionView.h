@@ -43,10 +43,14 @@ typedef enum {
 	UIImageView * markerView;
 		
 	AnonymousOverlaySelectionView * controller;
+    
+    int ID;
 }
 
 @property (nonatomic) OverlayItemState state;
 @property (nonatomic) BOOL isSelected;
+@property (nonatomic) int ID;
+
 
 - (AnonymousOverlay *)overlay;
 + (id)anonymousOverlayItemWithOverlay:(AnonymousOverlay *)anOverlay;
@@ -69,10 +73,15 @@ typedef enum {
 	BOOL isInEditMode;
 }
 
+- (void)reloadData;
+
 #pragma mark OverlayButton Functions
 
 - (void)editOverlayItem:(AnonymousOverlayItem *)item;
 - (void)selectOverlayItem:(AnonymousOverlayItem *)item;
+
+- (void)editOverlayItemWithID:(int)theID;
+- (void)selectOverlayItemWithID:(int)theID;
 
 #pragma mark Toolbar Functions
 

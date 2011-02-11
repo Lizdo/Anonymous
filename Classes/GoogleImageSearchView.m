@@ -10,6 +10,28 @@
 #import "NSDictionary_JSONExtensions.h"
 #import "CJSONDeserializer.h"
 
+static const float ImageViewMargin = 30.0f;
+
+@implementation GoogleImageSearchViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+        self.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RightMark.png"]]autorelease];
+    }
+    return self;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    self.imageView.frame = CGRectMake(ImageViewMargin,
+                                      0,
+                                      self.imageView.frame.size.width,
+                                      self.imageView.frame.size.height);
+}
+
+@end
+
+
 @interface GoogleImageSearchView(Private)
 - (void)startNewSearch;
 - (void)loadThumbnails;
@@ -127,6 +149,7 @@
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:theIndexPath];
     
     UIImage * image = [UIImage imageWithData:loader.data];
+    
     [thumbnailImages setObject:image forKey:theIndexPath];
     cell.imageView.image = image;
     
@@ -237,22 +260,29 @@
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    // Create a Image Cell
+    GoogleImageSearchViewCell * cell = (GoogleImageSearchViewCell *)[_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GoogleImageSearchViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.imageView.opaque = NO;
     }
+    
+
     
 	// Configure the cell.
 	NSString * str;
 	
+    cell.accessoryView.hidden = YES;
+    
 	switch (state) {
 		case GIS_SEARCH_COMPLETED:
 			str = @"";//[imageURLs objectAtIndex:indexPath.row];
             if ([thumbnailImages objectForKey:indexPath] == nil) {
                 cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
             }else{
-                cell.imageView.image = [thumbnailImages objectForKey:indexPath];
+                cell.imageView.image = [thumbnailImages objectForKey:indexPath];                
             }
+            cell.accessoryView.hidden = NO;            
 			break;
 		case GIS_SEARCH_FAILED:
 			str = @"Seach Failed...";
@@ -328,17 +358,21 @@
 	}
 }
 
-/*
+
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
- 
+     // Override this.
  }
- 
- */
+
 
 
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
+    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
+        [loader cancelDownload];
+    }
+    [thumbnailLoaders removeAllObjects];
+    
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc. that aren't in use.
@@ -348,11 +382,19 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
+        [loader cancelDownload];
+    }
+    [thumbnailLoaders removeAllObjects];    
 }
 
 
 - (void)dealloc {
-    [super dealloc];
+    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
+        [loader cancelDownload];
+    }
+    [thumbnailLoaders removeAllObjects];    
+    [super dealloc];    
 }
 
 

@@ -66,7 +66,7 @@
 
 - (id)initWithCoder:(NSCoder *)coder{
 	//NSObject does not support NSCoding
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		//retain image
         self.image = [coder decodeObjectForKey:@"image"];
 		offsetToFace = [coder decodeCGPointForKey:@"offsetToFace"];

@@ -14,6 +14,7 @@
 #import "AnonymousAppDelegate.h"
 
 @implementation AnonymousOverlayItem
+@synthesize ID;
 
 - (AnonymousOverlay *)overlay{
 	return overlay;
@@ -128,15 +129,7 @@
 	overlayItemMargin = (scrollView.frame.size.width - OverlayItemSize * ItemsPerRow)/(ItemsPerRow+1);
 	toolBarHeight = toolBar.frame.size.height;
 	
-	for (int i = 0; i < dataSource.count; i++) {
-		AnonymousOverlayItem * item = [AnonymousOverlayItem anonymousOverlayItemWithOverlay:[dataSource objectAtIndex:i]];
-		[item setValue:self forKeyPath:@"controller"];				
-		[scrollView addSubview:item];
-		item.center = [self centerForItemID:i];	
-		if (i == 0) {
-			item.isSelected = YES;
-		}
-	}
+    [self reloadData];
 	
     [super viewDidLoad];
 	
@@ -204,10 +197,50 @@
 
 }
 
+- (void)reloadData{
+    for (UIView * item in scrollView.subviews) {
+		if ([item isKindOfClass:[AnonymousOverlayItem class]]) {
+            [item removeFromSuperview];
+		}
+	}
+    for (int i = 0; i < dataSource.count; i++) {
+        AnonymousOverlay * overlay = [dataSource objectAtIndex:i];
+		AnonymousOverlayItem * item = [AnonymousOverlayItem anonymousOverlayItemWithOverlay:overlay];
+		[item setValue:self forKeyPath:@"controller"];				
+		[scrollView addSubview:item];
+		item.center = [self centerForItemID:i];	
+        item.ID = i;
+        // Select according to the data source, if new objects are selected, needs to be handled afterwards
+        if (overlay.isSelected) {
+            item.isSelected = YES;
+        }
+	}
+}
+
+
 - (void)addNewOverlayItem{
 	AnonymousOverlayAddView * overlayAddController = [[AnonymousOverlayAddView alloc]initWithDefaultNib];
 	[self presentModalViewController:overlayAddController animated:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(newOverlayAdded)
+                                                 name:@"NewOverlayAddedNotification" object:nil];
 }
+
+- (void)newOverlayAdded{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self dismissModalViewControllerAnimated:YES];
+    [self reloadData];
+    // select the last object
+    [self selectOverlayItemWithID:[dataSource count]-1];
+    //Wait until overlay is removed, then edit the last object
+    [self editOverlayItemWithID:[dataSource count]-1];    
+}
+ 
+ - (void)newOverlayCancelled{
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
+     [self dismissModalViewControllerAnimated:YES];
+ }
 
 - (void)editOverlayItem:(AnonymousOverlayItem *)item{
 	//self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -225,10 +258,36 @@
 		}
 	}
 	selectedItem.isSelected = YES;
-	
 	//TODO: Set the current overlay here
 }
 
+- (void)editOverlayItemWithID:(int)theID{
+    NSAssert(theID < [dataSource count], @"ID out of range");
+    AnonymousOverlayItem * selectedItem;
+    for (UIView * item in scrollView.subviews) {
+		if ([item isKindOfClass:[AnonymousOverlayItem class]]) {
+			if (((AnonymousOverlayItem *)item).ID == theID){
+				selectedItem = (AnonymousOverlayItem * )item;
+                break;
+            }
+		}
+	}
+    [self selectOverlayItem:selectedItem];
+}
+
+
+- (void)selectOverlayItemWithID:(int)theID{
+    NSAssert(theID < [dataSource count], @"ID out of range");    
+    for (UIView * item in scrollView.subviews) {
+		if ([item isKindOfClass:[AnonymousOverlayItem class]]) {
+			if (((AnonymousOverlayItem *)item).ID != theID){
+				((AnonymousOverlayItem *)item).isSelected = NO;
+			}else{
+                ((AnonymousOverlayItem *)item).isSelected = YES;
+            }
+		}
+	}        
+}
 
 #pragma mark Helper Functions
 
