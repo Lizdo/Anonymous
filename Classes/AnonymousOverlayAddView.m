@@ -21,13 +21,17 @@
         return;
     }
     
-    NSMutableArray *overlays = ((AnonymousAppDelegate *)[UIApplication sharedApplication].delegate).overlays;
-    
     UIImage * image = [thumbnailImages objectForKey:indexPath];
+    
+    if (image == nil) {
+        // Do nothing if the thumbnail is not loaded
+        return;
+    }
     
     // Remove white background
     UIImage * convertedImage = [self changeWhiteColorTransparent:image];
     
+    NSMutableArray *overlays = ((AnonymousAppDelegate *)[UIApplication sharedApplication].delegate).overlays;    
     [overlays addObject:[AnonymousOverlay AnonymousOverlayWithImage:convertedImage]];
     
     [[NSNotificationCenter defaultCenter]

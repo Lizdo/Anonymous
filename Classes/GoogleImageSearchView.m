@@ -34,6 +34,7 @@ static const float ImageViewMargin = 30.0f;
 
 @interface GoogleImageSearchView(Private)
 - (void)startNewSearch;
+- (void)cancelSearch;
 - (void)loadThumbnails;
 @end
 
@@ -102,6 +103,8 @@ static const float ImageViewMargin = 30.0f;
 			[connection cancel];
 		}
 	}
+    
+    [self cancelSearch];
 	
 	state = GIS_SEARCH_IN_PROGRESS;
 	
@@ -137,6 +140,13 @@ static const float ImageViewMargin = 30.0f;
         loader.delegate = self;
         [thumbnailLoaders setObject:loader forKey:indexPath];
     }
+}
+
+- (void)cancelSearch{
+    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
+        [loader cancelDownload];
+    }
+    [thumbnailLoaders removeAllObjects];
 }
 
 #pragma mark -
@@ -179,19 +189,24 @@ static const float ImageViewMargin = 30.0f;
 	NSNumber * responseStatus = [dic objectForKey:@"responseStatus"];
 	if ([responseStatus intValue] == 200) {
 		NSLog(@"200, Parse Success");
-		state = GIS_SEARCH_COMPLETED;
 		
 		NSDictionary * responseData = [dic objectForKey:@"responseData"];
 		NSArray * results = [responseData objectForKey:@"results"];
-		NSMutableArray * urls = [NSMutableArray arrayWithCapacity:10];
-		NSMutableArray * heights = [NSMutableArray arrayWithCapacity:10];     
-		for (NSDictionary * obj in results) {
-			[urls addObject:[obj objectForKey:@"tbUrl"]];
-			[heights addObject:[obj objectForKey:@"tbHeight"]];            
-		}
-		self.imageURLs = urls;
-        self.imageHeights = heights;
-        [self loadThumbnails];
+        
+        if ([results count] == 0) {
+            state = GIS_SEARCH_NO_RESULT;
+        }else{
+            state = GIS_SEARCH_COMPLETED;
+            NSMutableArray * urls = [NSMutableArray arrayWithCapacity:10];
+            NSMutableArray * heights = [NSMutableArray arrayWithCapacity:10];     
+            for (NSDictionary * obj in results) {
+                [urls addObject:[obj objectForKey:@"tbUrl"]];
+                [heights addObject:[obj objectForKey:@"tbHeight"]];            
+            }
+            self.imageURLs = urls;
+            self.imageHeights = heights;
+            [self loadThumbnails];            
+        }
 	}else {
 		NSLog(@"Parse Failure");
 		state = GIS_SEARCH_FAILED;
@@ -276,14 +291,17 @@ static const float ImageViewMargin = 30.0f;
     
 	switch (state) {
 		case GIS_SEARCH_COMPLETED:
-			str = @"";//[imageURLs objectAtIndex:indexPath.row];
+            str = @"";//[imageURLs objectAtIndex:indexPath.row];
             if ([thumbnailImages objectForKey:indexPath] == nil) {
                 cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
             }else{
                 cell.imageView.image = [thumbnailImages objectForKey:indexPath];                
             }
-            cell.accessoryView.hidden = NO;            
+            cell.accessoryView.hidden = NO;
 			break;
+        case GIS_SEARCH_NO_RESULT:
+            str = @"No Results Found...";
+            break;
 		case GIS_SEARCH_FAILED:
 			str = @"Seach Failed...";
 			break;
@@ -349,7 +367,7 @@ static const float ImageViewMargin = 30.0f;
     switch (state) {
 		case GIS_SEARCH_COMPLETED:
             return [[imageHeights objectAtIndex:indexPath.row] floatValue];
-			break;
+        case GIS_SEARCH_NO_RESULT:
 		case GIS_SEARCH_FAILED:
 		case GIS_SEARCH_IN_PROGRESS:		
 		case GIS_STANDBY:
@@ -360,7 +378,7 @@ static const float ImageViewMargin = 30.0f;
 
 
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-     // Override this.
+     // Subclass, please override this.
  }
 
 
@@ -368,11 +386,7 @@ static const float ImageViewMargin = 30.0f;
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
-    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
-        [loader cancelDownload];
-    }
-    [thumbnailLoaders removeAllObjects];
-    
+    [self cancelSearch];    
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc. that aren't in use.
@@ -382,18 +396,12 @@ static const float ImageViewMargin = 30.0f;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
-        [loader cancelDownload];
-    }
-    [thumbnailLoaders removeAllObjects];    
+    [self cancelSearch];
 }
 
 
 - (void)dealloc {
-    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
-        [loader cancelDownload];
-    }
-    [thumbnailLoaders removeAllObjects];    
+    [self cancelSearch];
     [super dealloc];    
 }
 

@@ -16,6 +16,7 @@ typedef enum _GoogleImageSearchState{
 	GIS_STANDBY,
 	GIS_SEARCH_IN_PROGRESS,
 	GIS_SEARCH_COMPLETED,
+    GIS_SEARCH_NO_RESULT,
 	GIS_SEARCH_FAILED,
 }GIS_State;
 
@@ -23,7 +24,8 @@ typedef enum _GoogleImageSearchState{
 }
 @end
 
-@interface GoogleImageSearchView : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, GoogleImageThumbnailLoaderDelegate>{
+@interface GoogleImageSearchView : UIViewController <UITableViewDataSource,
+ UITableViewDelegate, UISearchBarDelegate, GoogleImageThumbnailLoaderDelegate>{
 	IBOutlet UISearchBar * searchBar;
 	IBOutlet UITableView * tableView;
 	
@@ -47,5 +49,6 @@ typedef enum _GoogleImageSearchState{
 
 - (id)initWithDefaultNib;
 - (IBAction)performSearch;
+
 
 @end
