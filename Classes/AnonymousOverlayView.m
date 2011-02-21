@@ -7,6 +7,8 @@
 //
 
 #import "AnonymousOverlayView.h"
+#import "AnonymousAppDelegate.h"
+
 
 #define DefaultEnlargeScale 1.5
 
@@ -105,7 +107,7 @@
 			[rects addObject:[NSValue valueWithCGRect:CGRectZero]];
 		}
 		// Default Overlay
-		self.overlay = [AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]];
+		self.overlay = [(AnonymousAppDelegate *)([[UIApplication sharedApplication] delegate]) selectedOverlay];
     }
     return self;
 }

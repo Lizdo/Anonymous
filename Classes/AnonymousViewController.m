@@ -1,5 +1,6 @@
 #import "AnonymousViewController.h"
 #import "AnonymousOverlayView.h"
+#import "AnonymousAppDelegate.h"
 
 
 @implementation AnonymousViewController
@@ -493,7 +494,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	[session startRunning];
 	takePictureButton.enabled = YES;
     // Hide status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    
+    // Set New overlay
+    overlayView.overlay = [(AnonymousAppDelegate *)([UIApplication sharedApplication].delegate) selectedOverlay];
     
 #endif
 }

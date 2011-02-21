@@ -156,7 +156,9 @@ static const float ImageViewMargin = 30.0f;
 }
 
 - (void)cancelSearch{
-    for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
+    
+    for (id key in thumbnailLoaders){
+        GoogleImageThumbnailLoader * loader = [thumbnailLoaders objectForKey:key];
         if (loader) {
             [loader cancelDownload];
         }
@@ -403,7 +405,6 @@ static const float ImageViewMargin = 30.0f;
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
-    [self cancelSearch];    
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc. that aren't in use.
