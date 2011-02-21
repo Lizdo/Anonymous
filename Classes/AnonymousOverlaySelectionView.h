@@ -64,6 +64,8 @@ typedef enum {
 	IBOutlet UIView *toolBar;
 	IBOutlet UIButton *cancelButton;
 	IBOutlet UIScrollView *scrollView;
+    
+    UIButton *addFromGoogleButton;
 	
 	float overlayItemMargin;
 	float toolBarHeight;

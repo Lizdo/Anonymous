@@ -157,7 +157,9 @@ static const float ImageViewMargin = 30.0f;
 
 - (void)cancelSearch{
     for (GoogleImageThumbnailLoader *loader in thumbnailLoaders){
-        [loader cancelDownload];
+        if (loader) {
+            [loader cancelDownload];
+        }
     }
     [thumbnailLoaders removeAllObjects];
 }

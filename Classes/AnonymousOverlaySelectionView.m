@@ -112,6 +112,9 @@
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		//load from app delegate
 		dataSource = ((AnonymousAppDelegate *)[UIApplication sharedApplication].delegate).overlays;
+        
+
+
 	}
 	return self;
 }
@@ -129,6 +132,20 @@
 	overlayItemMargin = (scrollView.frame.size.width - OverlayItemSize * ItemsPerRow)/(ItemsPerRow+1);
 	toolBarHeight = toolBar.frame.size.height;
 	
+    // Add the button
+    addFromGoogleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [scrollView addSubview:addFromGoogleButton];
+    
+    
+    [addFromGoogleButton setBackgroundImage:[UIImage imageNamed:@"AddFromGoogle.png"] 
+                                   forState:UIControlStateNormal];
+    [addFromGoogleButton addTarget:self 
+                            action:@selector(addNewOverlayItem) 
+                  forControlEvents:UIControlEventTouchUpInside];
+    
+    addFromGoogleButton.frame = CGRectMake(0, 0, OverlayItemSize, OverlayItemSize);    
+    
     [self reloadData];
 	
     [super viewDidLoad];
@@ -136,8 +153,8 @@
     // Show status bar
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     
-	// Hack to test search interface
-	[self performSelector:@selector(addNewOverlayItem) withObject:self afterDelay:1];
+//	// Hack to test search interface
+//	[self performSelector:@selector(addNewOverlayItem) withObject:self afterDelay:1];
 }
 
 
@@ -215,6 +232,9 @@
             item.isSelected = YES;
         }
 	}
+    
+    // Add Button should be the last
+    addFromGoogleButton.center = [self centerForItemID:dataSource.count];
 }
 
 
