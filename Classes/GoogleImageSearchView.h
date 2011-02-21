@@ -48,7 +48,8 @@ typedef enum _GoogleImageSearchState{
 @property (retain, nonatomic) NSMutableDictionary * thumbnailImages;
 
 - (id)initWithDefaultNib;
-- (IBAction)performSearch;
+- (void)performSearch;
+- (void)tableViewTouchEnded;
 
 
 @end

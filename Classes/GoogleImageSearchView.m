@@ -71,6 +71,12 @@ static const float ImageViewMargin = 30.0f;
 	state = GIS_STANDBY;
     // Set focus to the search bar
     [searchBar becomeFirstResponder];
+    
+    // Add tap recognizer to the table view
+    UITapGestureRecognizer * recognizer = [[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tableViewTouchEnded)] autorelease];
+    recognizer.cancelsTouchesInView = NO;
+    [tableView addGestureRecognizer:recognizer];
+    
 }
 
 #pragma mark -
@@ -92,6 +98,13 @@ static const float ImageViewMargin = 30.0f;
     
     // Close the keyboard
     [searchBar resignFirstResponder];
+}
+
+- (void)tableViewTouchEnded{
+    // Close the keyboard when we touch the table view
+    if ([searchBar isFirstResponder]) {
+        [searchBar resignFirstResponder];
+    }
 }
 
 
@@ -244,8 +257,10 @@ static const float ImageViewMargin = 30.0f;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar{
-    // Close the keyboard
-    [searchBar resignFirstResponder];
+    // Close the panel
+    [self cancelSearch];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"NewOverlayAddedNotification" object:self];
 }
 
 
