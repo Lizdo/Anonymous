@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "AnonymousOverlayView.h"
 
-@interface AnonymousOverlayEditView : UIViewController {
+@interface AnonymousOverlayEditView : UIViewController <UIAlertViewDelegate>{
 	AnonymousOverlay * overlay;
 	CGRect faceRect;
 	
 	IBOutlet UIView * eventView;
 	UIImageView * imageView;
-	
 }
 
 
@@ -23,5 +22,6 @@
 
 - (IBAction)cancelAndReturn;
 - (IBAction)saveAndReturn;
+- (IBAction)delete;
 
 @end

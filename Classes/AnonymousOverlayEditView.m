@@ -8,6 +8,7 @@
 
 #import "AnonymousOverlayEditView.h"
 #import "AnonymousOverlaySelectionView.h"
+#import "AnonymousAppDelegate.h"
 
 
 @implementation AnonymousOverlayEditView
@@ -84,6 +85,35 @@
 	[((AnonymousOverlaySelectionView *)(self.parentViewController)) toggleEdit];	
 	[self.parentViewController dismissModalViewControllerAnimated:YES];	
 }
+
+- (IBAction)delete{
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Confirm Delete"
+                                                         message:@"Delete this overlay?"
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:@"Delete", nil];
+    [alertView show];
+    [alertView release];                            
+}
+
+#pragma -
+#pragma UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        // confirm delete
+        AnonymousAppDelegate * appDelegate = (AnonymousAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate removeOverlay:overlay];
+        
+        // Return to parent view
+        [((AnonymousOverlaySelectionView *)(self.parentViewController)) toggleEdit];
+        [((AnonymousOverlaySelectionView *)(self.parentViewController)) reloadData];        
+        [self.parentViewController dismissModalViewControllerAnimated:YES];
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

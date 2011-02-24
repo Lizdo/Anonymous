@@ -56,6 +56,10 @@
 	return [overlays objectAtIndex:0];
 }
 
+- (void)removeOverlay:(AnonymousOverlay *)overlay{
+    [overlays removeObject:overlay];
+}
+
 
 - (void)save{
 	BOOL result = [NSKeyedArchiver archiveRootObject:overlays toFile:[self overlayFilePath]];
