@@ -15,6 +15,11 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Don't select if the keyboard is out.
+    if ([searchBar isFirstResponder]) {
+        return;
+    }
+    
     //Save the image then edit it in the AnonymousEditView
     if (state != GIS_SEARCH_COMPLETED) {
         // Do nothing if there's no search result

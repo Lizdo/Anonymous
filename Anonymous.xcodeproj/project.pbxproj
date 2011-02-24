@@ -73,6 +73,8 @@
 		6ECDDE6412F3A95600687C7F /* libopencv_objdetect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */; };
 		6ECDDE7F12F3A99700687C7F /* libopencv_legacy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */; };
 		6ECDDE8312F3A9A000687C7F /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */; };
+		6EE187FF13169201002394DD /* AddMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE187FD13169201002394DD /* AddMark.png */; };
+		6EE1880013169201002394DD /* AddMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE187FE13169201002394DD /* AddMark@2x.png */; };
 		6EF607EF12DDFB2000CF7D57 /* SHKCustomFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075712DDFB1F00CF7D57 /* SHKCustomFormController.m */; };
 		6EF607F012DDFB2000CF7D57 /* SHKCustomFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075912DDFB1F00CF7D57 /* SHKCustomFormFieldCell.m */; };
 		6EF607F112DDFB2000CF7D57 /* SHKCustomShareMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075C12DDFB1F00CF7D57 /* SHKCustomShareMenu.m */; };
@@ -228,6 +230,8 @@
 		6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_objdetect.a; path = opencv_device/lib/libopencv_objdetect.a; sourceTree = "<group>"; };
 		6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_legacy.a; path = opencv_device/lib/libopencv_legacy.a; sourceTree = "<group>"; };
 		6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_imgproc.a; path = opencv_device/lib/libopencv_imgproc.a; sourceTree = "<group>"; };
+		6EE187FD13169201002394DD /* AddMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddMark.png; sourceTree = "<group>"; };
+		6EE187FE13169201002394DD /* AddMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddMark@2x.png"; sourceTree = "<group>"; };
 		6EF6075312DDFB1F00CF7D57 /* SHKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKConfig.h; sourceTree = "<group>"; };
 		6EF6075612DDFB1F00CF7D57 /* SHKCustomFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKCustomFormController.h; sourceTree = "<group>"; };
 		6EF6075712DDFB1F00CF7D57 /* SHKCustomFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHKCustomFormController.m; sourceTree = "<group>"; };
@@ -570,6 +574,8 @@
 				6E49E68012CCD7CB00A577C6 /* RightMark.png */,
 				6E49E68112CCD7CB00A577C6 /* EditMark@2x.png */,
 				6E49E68212CCD7CB00A577C6 /* EditMark.png */,
+				6EE187FD13169201002394DD /* AddMark.png */,
+				6EE187FE13169201002394DD /* AddMark@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1041,6 +1047,8 @@
 				6EBD8F3412F7444800C26516 /* GoogleImageSearchView.xib in Resources */,
 				6E972AB9130176A600D63D42 /* Placeholder.png in Resources */,
 				6E9640331312A54D005A0A75 /* AddFromGoogle.png in Resources */,
+				6EE187FF13169201002394DD /* AddMark.png in Resources */,
+				6EE1880013169201002394DD /* AddMark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

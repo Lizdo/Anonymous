@@ -12,11 +12,13 @@
 
 static const float ImageViewMargin = 30.0f;
 
+#define MinimumRowHeight 60.0f
+
 @implementation GoogleImageSearchViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        self.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RightMark.png"]]autorelease];
+        self.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddMark.png"]]autorelease];
     }
     return self;
 }
@@ -383,9 +385,11 @@ static const float ImageViewMargin = 30.0f;
 #pragma mark Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    float imageHeight;
     switch (state) {
 		case GIS_SEARCH_COMPLETED:
-            return [[imageHeights objectAtIndex:indexPath.row] floatValue];
+            imageHeight = [[imageHeights objectAtIndex:indexPath.row] floatValue];
+            return MAX(imageHeight, MinimumRowHeight);
         case GIS_SEARCH_NO_RESULT:
 		case GIS_SEARCH_FAILED:
 		case GIS_SEARCH_IN_PROGRESS:		
