@@ -20,7 +20,12 @@
 	[window makeKeyAndVisible];
 	
 	// TODO: load the array from the disk on background thread
-	overlays = [NSKeyedUnarchiver unarchiveObjectWithFile:[self overlayFilePath]];
+    [self performSelectorInBackground:@selector(loadOverlay) withObject:self];
+}
+
+- (void)loadOverlay{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    overlays = [NSKeyedUnarchiver unarchiveObjectWithFile:[self overlayFilePath]];
 	if (overlays == nil) {
 		// No valid object extracted, create a temp one
 		overlays = [NSMutableArray arrayWithObject:[AnonymousOverlay AnonymousOverlayWithImage:[UIImage imageNamed:@"laughing_man.png"]]];
@@ -29,6 +34,12 @@
 	}
 	
 	[overlays retain];
+    [pool release];
+    
+    // Post load complete notification
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"OverlayLoadedCompleteNotification" object:self];
+    
 }
 
 - (NSString *)overlayFilePath{

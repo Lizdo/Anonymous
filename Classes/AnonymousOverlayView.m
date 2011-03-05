@@ -106,10 +106,17 @@
 		for (int i = 0; i < 10; i++) {
 			[rects addObject:[NSValue valueWithCGRect:CGRectZero]];
 		}
+        
 		// Default Overlay
-		self.overlay = [(AnonymousAppDelegate *)([[UIApplication sharedApplication] delegate]) selectedOverlay];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(assignDefaultOverlay)
+                                                     name:@"OverlayLoadedCompleteNotification" object:nil];
     }
     return self;
+}
+
+- (void)assignDefaultOverlay{
+    self.overlay = [(AnonymousAppDelegate *)([[UIApplication sharedApplication] delegate]) selectedOverlay];
 }
 
 - (void)drawRect:(CGRect)rect {

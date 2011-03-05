@@ -19,6 +19,7 @@
 - (void)save;
 - (NSString *)overlayFilePath;
 
+- (void)loadOverlay;
 - (void)removeOverlay:(AnonymousOverlay *)overlay;
 
 @end
