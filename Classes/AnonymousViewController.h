@@ -3,7 +3,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreVideo/CoreVideo.h>
 #import <CoreMedia/CoreMedia.h>
-#import <opencv/cv.h>
+#import <CoreImage/CoreImage.h>
 
 #import "UIView+SaveToImage.h"
 #import "AnonymousOverlaySelectionView.h"
@@ -30,26 +30,23 @@
 	
 	SystemSoundID alertSoundID;
 	
-	CvHaarClassifierCascade* cascade;
-	CvMemStorage* storage;
-	
-	IplImage *test_image;
-	IplImage *small_image;
-	IplImage *gray; 
-	
 	UIImage *previewImage;
 	
 	NSDate *start;
 	
-	CGRect previousFace1;
-	CGRect previousFace2;
 	int notFoundCount;
+    
+    CIDetector * ciDetector;
+    CIContext * ciContext;
 }
 
 @property (nonatomic, retain) UIView *previewView;
 @property (nonatomic, retain) UIImage *previewImage;
 @property (nonatomic, retain) AnonymousOverlayView *overlayView;
 @property (nonatomic, retain) NSDate *start;
+@property (nonatomic, retain) CIDetector * ciDetector;
+@property (nonatomic, retain) CIContext * ciContext;
+
 
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
 - (IBAction)saveImage;

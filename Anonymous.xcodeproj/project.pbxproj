@@ -21,6 +21,7 @@
 		54BBAF4F0F0414C200568ED9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BBAF4E0F0414C200568ED9 /* AudioToolbox.framework */; };
 		54ED862C123C4A8B00ED9656 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54ED862B123C4A8B00ED9656 /* Accelerate.framework */; };
 		54FC5BDE0E3EB3EB00F48645 /* laughing_man.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */; };
+		6E04D36913C3632300B028BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E04D36813C3632300B028BB /* CoreImage.framework */; };
 		6E095E9312D219020060C33A /* AnonymousOverlayEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */; };
 		6E095E9412D219020060C33A /* AnonymousOverlayEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */; };
 		6E095EFD12D36A580060C33A /* EditBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E095EFC12D36A580060C33A /* EditBackground.png */; };
@@ -44,7 +45,6 @@
 		6E49E68612CCD7CB00A577C6 /* RightMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E49E68012CCD7CB00A577C6 /* RightMark.png */; };
 		6E49E68712CCD7CB00A577C6 /* EditMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E49E68112CCD7CB00A577C6 /* EditMark@2x.png */; };
 		6E49E68812CCD7CB00A577C6 /* EditMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E49E68212CCD7CB00A577C6 /* EditMark.png */; };
-		6E58911F12BF9F120030818A /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E58911E12BF9F120030818A /* haarcascade_frontalface_alt.xml */; };
 		6E58947012C325F20030818A /* UIView+SaveToImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E58946F12C325F20030818A /* UIView+SaveToImage.m */; };
 		6E5894C612C365550030818A /* Grab.aif in Resources */ = {isa = PBXBuildFile; fileRef = 6E5894C512C365550030818A /* Grab.aif */; };
 		6E58950912C37D410030818A /* CameraButton_Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E58950312C37D410030818A /* CameraButton_Down.png */; };
@@ -69,10 +69,6 @@
 		6EBD8EB712F73B5400C26516 /* AnonymousOverlayAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD8EB612F73B5400C26516 /* AnonymousOverlayAddView.m */; };
 		6EBD8EBE12F73B6F00C26516 /* GoogleImageSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */; };
 		6EBD8F3412F7444800C26516 /* GoogleImageSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */; };
-		6ECDDE6312F3A95600687C7F /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE6112F3A95600687C7F /* libopencv_core.a */; };
-		6ECDDE6412F3A95600687C7F /* libopencv_objdetect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */; };
-		6ECDDE7F12F3A99700687C7F /* libopencv_legacy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */; };
-		6ECDDE8312F3A9A000687C7F /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */; };
 		6EE187FF13169201002394DD /* AddMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE187FD13169201002394DD /* AddMark.png */; };
 		6EE1880013169201002394DD /* AddMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE187FE13169201002394DD /* AddMark@2x.png */; };
 		6EF607EF12DDFB2000CF7D57 /* SHKCustomFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6075712DDFB1F00CF7D57 /* SHKCustomFormController.m */; };
@@ -161,6 +157,7 @@
 		54BBAF4E0F0414C200568ED9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		54ED862B123C4A8B00ED9656 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laughing_man.png; sourceTree = "<group>"; };
+		6E04D36813C3632300B028BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		6E095E9012D219020060C33A /* AnonymousOverlayEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnonymousOverlayEditView.h; sourceTree = "<group>"; };
 		6E095E9112D219020060C33A /* AnonymousOverlayEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnonymousOverlayEditView.m; sourceTree = "<group>"; };
 		6E095E9212D219020060C33A /* AnonymousOverlayEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AnonymousOverlayEditView.xib; path = Classes/AnonymousOverlayEditView.xib; sourceTree = "<group>"; };
@@ -197,7 +194,6 @@
 		6E49E68012CCD7CB00A577C6 /* RightMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RightMark.png; sourceTree = "<group>"; };
 		6E49E68112CCD7CB00A577C6 /* EditMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EditMark@2x.png"; sourceTree = "<group>"; };
 		6E49E68212CCD7CB00A577C6 /* EditMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EditMark.png; sourceTree = "<group>"; };
-		6E58911E12BF9F120030818A /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = haarcascade_frontalface_alt.xml; path = opencv_device/share/opencv/haarcascades/haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
 		6E58946E12C325F20030818A /* UIView+SaveToImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SaveToImage.h"; sourceTree = "<group>"; };
 		6E58946F12C325F20030818A /* UIView+SaveToImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SaveToImage.m"; sourceTree = "<group>"; };
 		6E5894C512C365550030818A /* Grab.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = Grab.aif; sourceTree = "<group>"; };
@@ -226,10 +222,6 @@
 		6EBD8EBC12F73B6F00C26516 /* GoogleImageSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleImageSearchView.h; sourceTree = "<group>"; };
 		6EBD8EBD12F73B6F00C26516 /* GoogleImageSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleImageSearchView.m; sourceTree = "<group>"; };
 		6EBD8F3312F7444800C26516 /* GoogleImageSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleImageSearchView.xib; sourceTree = "<group>"; };
-		6ECDDE6112F3A95600687C7F /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_core.a; path = opencv_device/lib/libopencv_core.a; sourceTree = "<group>"; };
-		6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_objdetect.a; path = opencv_device/lib/libopencv_objdetect.a; sourceTree = "<group>"; };
-		6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_legacy.a; path = opencv_device/lib/libopencv_legacy.a; sourceTree = "<group>"; };
-		6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_imgproc.a; path = opencv_device/lib/libopencv_imgproc.a; sourceTree = "<group>"; };
 		6EE187FD13169201002394DD /* AddMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddMark.png; sourceTree = "<group>"; };
 		6EE187FE13169201002394DD /* AddMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddMark@2x.png"; sourceTree = "<group>"; };
 		6EF6075312DDFB1F00CF7D57 /* SHKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKConfig.h; sourceTree = "<group>"; };
@@ -369,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E04D36913C3632300B028BB /* CoreImage.framework in Frameworks */,
 				540723E20E3DD25B00B598A2 /* Foundation.framework in Frameworks */,
 				540723E30E3DD25B00B598A2 /* UIKit.framework in Frameworks */,
 				540723E40E3DD25B00B598A2 /* CoreGraphics.framework in Frameworks */,
@@ -381,10 +374,6 @@
 				6EF6083D12DDFB4D00CF7D57 /* MessageUI.framework in Frameworks */,
 				6EF6083F12DDFB4D00CF7D57 /* Security.framework in Frameworks */,
 				6EF6084112DDFB4D00CF7D57 /* SystemConfiguration.framework in Frameworks */,
-				6ECDDE6312F3A95600687C7F /* libopencv_core.a in Frameworks */,
-				6ECDDE6412F3A95600687C7F /* libopencv_objdetect.a in Frameworks */,
-				6ECDDE7F12F3A99700687C7F /* libopencv_legacy.a in Frameworks */,
-				6ECDDE8312F3A9A000687C7F /* libopencv_imgproc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,12 +419,12 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6E04D36813C3632300B028BB /* CoreImage.framework */,
 				6EF6071312DDF5BC00CF7D57 /* Sound */,
 				6E58950112C37D2D0030818A /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				540723F00E3DD28C00B598A2 /* Libraries */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -454,7 +443,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6E58911E12BF9F120030818A /* haarcascade_frontalface_alt.xml */,
 				54FC5BDD0E3EB3EB00F48645 /* laughing_man.png */,
 				540ABCF50E3E280700E30885 /* Icon.png */,
 				5452E0090E3D08AA00FE4518 /* lena.jpg */,
@@ -484,17 +472,6 @@
 				54ED862B123C4A8B00ED9656 /* Accelerate.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		540723F00E3DD28C00B598A2 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				6ECDDE8212F3A9A000687C7F /* libopencv_imgproc.a */,
-				6ECDDE7E12F3A99700687C7F /* libopencv_legacy.a */,
-				6ECDDE6112F3A95600687C7F /* libopencv_core.a */,
-				6ECDDE6212F3A95600687C7F /* libopencv_objdetect.a */,
-			);
-			name = Libraries;
 			sourceTree = "<group>";
 		};
 		6E349E9F12FE960700192AD3 /* TouchJSON */ = {
@@ -1017,7 +994,6 @@
 				549913C70E3E3D2100BD1311 /* Default.png in Resources */,
 				54FC5BDE0E3EB3EB00F48645 /* laughing_man.png in Resources */,
 				54BBAF3D0F04148D00568ED9 /* Tink.aiff in Resources */,
-				6E58911F12BF9F120030818A /* haarcascade_frontalface_alt.xml in Resources */,
 				6E5894C612C365550030818A /* Grab.aif in Resources */,
 				6E58950912C37D410030818A /* CameraButton_Down.png in Resources */,
 				6E58950A12C37D410030818A /* CameraButton_Down@2x.png in Resources */,

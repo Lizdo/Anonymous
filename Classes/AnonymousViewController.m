@@ -4,7 +4,7 @@
 
 
 @implementation AnonymousViewController
-@synthesize previewView, overlayView, start, previewImage;
+@synthesize previewView, overlayView, start, previewImage, ciContext, ciDetector;
 
 #define FrameBufferWidth 360
 #define FrameBufferHeight 480
@@ -13,83 +13,11 @@
 #define TimeToPredict 6
 
 
-IplImage* transposeImage(IplImage* image) {
-	
-	IplImage *rotated = cvCreateImage(cvSize(image->height,image->width), IPL_DEPTH_8U,image->nChannels);
-	
-	CvPoint2D32f center;
-	
-	float center_val = image->height/2.0f;
-	center.x = center_val;
-	center.y = center_val;
-	CvMat *mapMatrix = cvCreateMat( 2, 3, CV_32FC1 );
-	
-	cv2DRotationMatrix(center, -90, 1.0, mapMatrix);
-	cvWarpAffine(image, rotated, mapMatrix, CV_INTER_LINEAR + CV_WARP_FILL_OUTLIERS, cvScalarAll(0));
-	
-	cvReleaseMat(&mapMatrix);
-	
-	return rotated;
-}
-
-CGRect predictedRect(CGRect rect2, CGRect rect1){
-	if (CGRectEqualToRect(rect2, CGRectZero) || CGRectEqualToRect(rect1, CGRectZero)) {
-		return CGRectZero;
-	}
-	float width = rect2.size.width + (rect1.size.width - rect2.size.width) * 1.5;// Linear should be 2
-	float height = rect2.size.height + (rect1.size.height - rect2.size.height) * 1.5;
-	
-	float x = rect2.origin.x + (rect1.origin.x - rect2.origin.x) * 1.5;
-	float y = rect2.origin.y + (rect1.origin.y - rect2.origin.y) * 1.5;	
-	
-	return CGRectMake(x, y, width, height);
-}
-
 - (void)dealloc {
 	AudioServicesDisposeSystemSoundID(alertSoundID);
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark OpenCV Support Methods
-
-// NOTE you SHOULD cvReleaseImage() for the return value when end of the code.
-- (IplImage *)CreateIplImageFromUIImage:(UIImage *)image {
-	CGImageRef imageRef = image.CGImage;
-
-	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	IplImage *iplimage = cvCreateImage(cvSize(image.size.width, image.size.height), IPL_DEPTH_8U, 4);
-	CGContextRef contextRef = CGBitmapContextCreate(iplimage->imageData, iplimage->width, iplimage->height,
-													iplimage->depth, iplimage->widthStep,
-													colorSpace, kCGImageAlphaPremultipliedLast|kCGBitmapByteOrderDefault);
-	CGContextDrawImage(contextRef, CGRectMake(0, 0, image.size.width, image.size.height), imageRef);
-	CGContextRelease(contextRef);
-	CGColorSpaceRelease(colorSpace);
-
-	IplImage *ret = cvCreateImage(cvGetSize(iplimage), IPL_DEPTH_8U, 3);
-	cvCvtColor(iplimage, ret, CV_RGBA2BGR);
-	cvReleaseImage(&iplimage);
-
-	return ret;
-}
-
-// NOTE You should convert color mode as RGB before passing to this function
-- (UIImage *)UIImageFromIplImage:(IplImage *)image {
-	NSLog(@"IplImage (%d, %d) %d bits by %d channels, %d bytes/row %s", image->width, image->height, image->depth, image->nChannels, image->widthStep, image->channelSeq);
-
-	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	NSData *data = [NSData dataWithBytes:image->imageData length:image->imageSize];
-	CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)data);
-	CGImageRef imageRef = CGImageCreate(image->width, image->height,
-										image->depth, image->depth * image->nChannels, image->widthStep,
-										colorSpace, kCGImageAlphaNone|kCGBitmapByteOrderDefault,
-										provider, NULL, false, kCGRenderingIntentDefault);
-	UIImage *ret = [UIImage imageWithCGImage:imageRef];
-	CGImageRelease(imageRef);
-	CGDataProviderRelease(provider);
-	CGColorSpaceRelease(colorSpace);
-	return ret;
-}
 
 - (CGImageRef)CGImageRotatedByAngle:(CGImageRef)imgRef angle:(CGFloat)angle {
 	
@@ -133,125 +61,26 @@ CGRect predictedRect(CGRect rect2, CGRect rect1){
 #pragma mark Utilities for intarnal use
 
 - (void)prepareToDetectFace{
-	// Load XML
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"haarcascade_frontalface_alt" ofType:@"xml"];
-	cascade = (CvHaarClassifierCascade*)cvLoad([path cStringUsingEncoding:NSASCIIStringEncoding], NULL, NULL, NULL);
-	
-	gray = cvCreateImage( cvSize(FrameBufferHeight,FrameBufferWidth), 8, 1 );
-	small_image = cvCreateImage( cvSize( cvRound (FrameBufferHeight/DetectScale),
-												  cvRound (FrameBufferWidth/DetectScale)), 8, 1 );
-	storage = cvCreateMemStorage(0);
-
-	
+    self.ciContext = [CIContext contextWithOptions:nil];
+	self.ciDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:ciContext options:nil];
 }
 
 - (void)finishDetection{
-	if (cascade){
-		cvReleaseHaarClassifierCascade(&cascade);		
-	}
-	if (storage) {
-		cvReleaseMemStorage(&storage);
-	}
-	cvReleaseImage(&small_image);
-	cvReleaseImage(&gray);
+    self.ciDetector = nil;
+    self.ciContext = nil;
 }
 
 - (void)detectFace:(UIImage *)uiImage{
-	if(uiImage) {
-		processingImage = YES;
-		
-		cvSetErrMode(CV_ErrModeParent);
-		
-		test_image = [self CreateIplImageFromUIImage:uiImage];
-		
-		
-		if (LogTime) {
-			NSLog(@"IplImage: %f", -[start timeIntervalSinceNow]);
-			self.start = [NSDate date];	
-		}
-		
-		// Scaling down		
-		cvCvtColor( test_image, gray, CV_BGR2GRAY );
-		cvResize( gray, small_image, CV_INTER_LINEAR );
-		cvEqualizeHist( small_image, small_image );
-
-		// Turn the image -90 degree, as the format is like that from the buffer
-		IplImage *temp_image = transposeImage(small_image);		
-
-		if (LogTime) {
-			NSLog(@"Rotate IplImage: %f", -[start timeIntervalSinceNow]);
-			self.start = [NSDate date];		
-		}
-
-		// Detect Face
-		CvSeq* faces = cvHaarDetectObjects(temp_image, cascade, storage, 1.3f, 2, CV_HAAR_DO_CANNY_PRUNING, cvSize(20, 20), cvSize(300, 300));
-		
-		if (LogTime) {
-			NSLog(@"Detect Face: %f", -[start timeIntervalSinceNow]);
-			self.start = [NSDate date];
-		}
-
-		
-		// Draw results on the iamge
-		for(int i = 0; i < 10; i++) {
-			if (i >= faces->total) {
-				// Fill the rest with Zero
-				if (!CGRectEqualToRect([[overlayView.rects objectAtIndex:i] CGRectValue], CGRectZero)) {
-					[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:CGRectZero]];
-				}
-			}else{
-				// Fill the found faces in array, and cache them
-				CvRect cvrect = *(CvRect*)cvGetSeqElem(faces, i);
-				CGRect r = CGRectMake(cvrect.x * DetectScale, cvrect.y * DetectScale, cvrect.width * DetectScale, cvrect.height * DetectScale);
-				[overlayView.rects replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:r]];
-				//Cache the previous face for prediction
-				if (i == 0) {
-					if (CGRectEqualToRect(previousFace1, CGRectZero)){
-						previousFace2 = previousFace1 = r;					
-					}else {
-						previousFace2 = previousFace1;
-					}
-					previousFace1 = r;
-				}
-
-			}
-		}
-		
-		NSLog(@"total faces: %d", faces->total);
-		
-		
-		// If no face found, do a simple prediction
-		if (faces->total == 0) {
-			notFoundCount++;
-			if (notFoundCount >= TimeToPredict) {
-				//More than 0.5s not found, remove the face
-				//NSLog(@"No Face Found, Predict timeout");				
-				notFoundCount = 0;
-				previousFace1 = previousFace2 = CGRectZero;
-			}else {
-				CGRect r = predictedRect(previousFace2, previousFace1);
-				//NSLog(@"No Face Found, Predict %f, %f", r.size.width, r.size.height);				
-				previousFace2 = previousFace1;
-				previousFace1 = r;
-				[overlayView.rects replaceObjectAtIndex:0 withObject:[NSValue valueWithCGRect:r]];
-			}
-		}
-		
-
-		[overlayView performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:NO];
-		//[overlayView setNeedsDisplay];
-		
-		//Need to release IplImage from CreateIplImageFromUIImage()
-		cvReleaseImage(&temp_image);
-		cvReleaseImage(&test_image);
-		
-		if (LogTime) {
-			NSLog(@"Draw Result: %f", -[start timeIntervalSinceNow]);
-			start = nil;
-		}
-		
-		processingImage = NO;		
-	}
+    processingImage = YES;
+    CIImage * ciImage = [CIImage imageWithCGImage:uiImage.CGImage];
+    NSArray * features = [ciDetector featuresInImage:ciImage];
+    
+    // Let's assume that it's real time.
+    CGRect r = ((CIFeature *)[features objectAtIndex:0]).bounds;
+    
+    // Replace the 1st rect. TODO: Feed the rect array directly here.
+    [overlayView.rects replaceObjectAtIndex:0 withObject:[NSValue valueWithCGRect:r]];
+    processingImage = NO;    
 }
 
 
